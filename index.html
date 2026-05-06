@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdulloh CV | Premium Mini App</title>
+    <title>Abdulloh | Elite Portfolio</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Swiper.js for professional sliders -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <style>
         :root {
             --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.4);
+            --accent: #a855f7;
             --bg: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --glass: rgba(255, 255, 255, 0.03);
+            --card: rgba(17, 24, 39, 0.8);
+            --border: rgba(255, 255, 255, 0.08);
             --text: #f9fafb;
             --text-dim: #9ca3af;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         * {
@@ -27,257 +31,289 @@
 
         body {
             background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);
             color: var(--text);
-            padding: 16px;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding-bottom: 90px;
+            overflow-x: hidden;
         }
 
-        .container {
-            width: 100%;
-            max-width: 440px;
-            padding-bottom: 80px;
-        }
-
-        /* Profile Header */
-        .header {
-            text-align: center;
-            margin-bottom: 32px;
-            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .avatar-container {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 20px;
-        }
-
-        .avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 32px;
-            background: linear-gradient(135deg, #6366f1, #a855f7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 44px;
-            font-weight: 800;
-            box-shadow: 0 20px 40px var(--primary-glow);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 2;
-        }
-
-        .avatar-glow {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--primary);
-            filter: blur(30px);
-            opacity: 0.3;
-            z-index: 1;
-        }
-
-        h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: var(--glass);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            font-size: 13px;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--glass);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 16px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card h3 { font-size: 20px; color: var(--text); margin-bottom: 2px; }
-        .stat-card span { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Sections */
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 0 0 16px 8px;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .skill-item {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 24px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: all 0.3s ease;
-            animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .skill-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-2px);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        .skill-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
-
-        .skill-info h4 { font-size: 16px; margin-bottom: 2px; }
-        .skill-info p { font-size: 12px; color: var(--text-dim); }
-
-        /* Action Bar */
-        .action-bar {
+        /* Animated Background Elements */
+        .bg-glow {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 32px);
-            max-width: 408px;
-            z-index: 100;
-        }
-
-        .main-btn {
+            width: 300px;
+            height: 300px;
             background: var(--primary);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 20px;
-            width: 100%;
-            font-size: 16px;
-            font-weight: 700;
-            box-shadow: 0 10px 25px var(--primary-glow);
-            transition: all 0.2s active;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 50%;
         }
 
-        .main-btn:active { transform: scale(0.98); opacity: 0.9; }
+        /* Tabs Navigation */
+        .tabs-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--text);
+            background: var(--glass);
+            box-shadow: inset 0 0 0 1px var(--border);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 80px 20px 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        /* Hero Card */
+        .hero-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Delays for children */
-        .skill-item:nth-child(2) { animation-delay: 0.1s; }
-        .skill-item:nth-child(3) { animation-delay: 0.2s; }
-        .skill-item:nth-child(4) { animation-delay: 0.3s; }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 800;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
 
+        /* Skill Bars */
+        .skill-container { margin-bottom: 20px; }
+        .skill-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .skill-bar {
+            height: 8px;
+            background: var(--glass);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Project Slider */
+        .swiper {
+            width: 100%;
+            padding: 20px 0 50px;
+        }
+        .swiper-slide {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 20px;
+            height: auto;
+        }
+        .project-tag {
+            font-size: 11px;
+            background: var(--glass);
+            padding: 4px 10px;
+            border-radius: 10px;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        /* Footer Action */
+        .footer-action {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .btn-main {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="avatar-container">
-                <div class="avatar-glow"></div>
-                <div class="avatar">AM</div>
-            </div>
-            <div class="badge">Professional Expert</div>
-            <h1>Abdulloh Muhammadjonov</h1>
-            <p style="color: var(--text-dim); font-size: 14px;">Tashkent, Uzbekistan</p>
-        </header>
+    <div class="bg-glow" style="top: -100px; left: -100px;"></div>
+    <div class="bg-glow" style="bottom: -100px; right: -100px; background: var(--accent);"></div>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>1.5y</h3>
-                <span>Experience</span>
-            </div>
-            <div class="stat-card">
-                <h3>10+</h3>
-                <span>Projects</span>
-            </div>
-            <div class="stat-card">
-                <h3>AI</h3>
-                <span>Specialist</span>
+    <nav class="tabs-nav">
+        <button class="tab-btn active" onclick="showTab('home')">Asosiy</button>
+        <button class="tab-btn" onclick="showTab('portfolio')">Portfolio</button>
+        <button class="tab-btn" onclick="showTab('skills')">Mahorat</button>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home" class="content-section active">
+        <div class="hero-card">
+            <div class="profile-img">AM</div>
+            <h1 style="font-size: 28px; margin-bottom: 8px;">Abdulloh M.</h1>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">Creative Developer & Mobilographer</p>
+            <div style="display: flex; justify-content: center; gap: 15px;">
+                <div style="background: var(--glass); padding: 12px; border-radius: 16px; min-width: 80px;">
+                    <h3 style="color: var(--primary);">1.5y</h3>
+                    <span style="font-size: 10px; color: var(--text-dim);">Tajriba</span>
+                </div>
+                <div style="background: var(--glass); padding: 12px; border-radius: 16px; min-width: 80px;">
+                    <h3 style="color: var(--accent);">10+</h3>
+                    <span style="font-size: 10px; color: var(--text-dim);">Loyihalar</span>
+                </div>
             </div>
         </div>
 
-        <h2 class="section-title">⚡ Expertise</h2>
+        <div class="hero-card" style="text-align: left; padding: 24px;">
+            <h3 style="margin-bottom: 12px;">🎯 Maqsadim</h3>
+            <p style="font-size: 14px; color: var(--text-dim); line-height: 1.6;">
+                Vizual san'at va yuqori texnologiyalarni birlashtirib, dunyo miqyosidagi raqamli mahsulotlar yaratish. Har bir kadr va har bir qator kod ortida sifat yotadi.
+            </p>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="content-section">
+        <h2 style="margin-bottom: 10px;">🚀 Saralangan ishlar</h2>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <span class="project-tag">Mobilografiya</span>
+                    <h4>Cinematic Ad</h4>
+                    <p style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Professional 4K montaj va rangli korreksiya.</p>
+                </div>
+                <div class="swiper-slide">
+                    <span class="project-tag">Bot Development</span>
+                    <h4>Smart Balance</h4>
+                    <p style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">AI integratsiyali moliya boshqaruv tizimi.</p>
+                </div>
+                <div class="swiper-slide">
+                    <span class="project-tag">Development</span>
+                    <h4>Arenda Bot</h4>
+                    <p style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Ijara xizmatlarini avtomatlashtirish platformasi.</p>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="content-section">
+        <h2 style="margin-bottom: 20px;">🛠 Mahorat darajasi</h2>
         
-        <div class="skill-item">
-            <div class="skill-icon">📸</div>
-            <div class="skill-info">
-                <h4>Mobilography</h4>
-                <p>4K Production & Cinematic Editing</p>
+        <div class="skill-container">
+            <div class="skill-header">
+                <span>Mobilografiya</span>
+                <span>95%</span>
             </div>
+            <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
         </div>
 
-        <div class="skill-item">
-            <div class="skill-icon">🐍</div>
-            <div class="skill-info">
-                <h4>Bot Development</h4>
-                <p>Aiogram, FastAPI & Scalable AI</p>
+        <div class="skill-container">
+            <div class="skill-header">
+                <span>Python (Bot/AI)</span>
+                <span>88%</span>
             </div>
+            <div class="skill-bar"><div class="skill-progress" data-width="88%"></div></div>
         </div>
 
-        <div class="skill-item">
-            <div class="skill-icon">🎨</div>
-            <div class="skill-info">
-                <h4>SMM & Strategy</h4>
-                <p>Content Branding & Growth</p>
+        <div class="skill-container">
+            <div class="skill-header">
+                <span>SMM & Branding</span>
+                <span>80%</span>
             </div>
+            <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
         </div>
 
-        <div class="skill-item">
-            <div class="skill-icon">🔧</div>
-            <div class="skill-info">
-                <h4>Car Detailing</h4>
-                <p>Professional Protection & Design</p>
+        <div class="skill-container">
+            <div class="skill-header">
+                <span>Web Development</span>
+                <span>75%</span>
             </div>
+            <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
         </div>
-    </div>
+    </section>
 
-    <div class="action-bar">
-        <button class="main-btn" onclick="Telegram.WebApp.close()">Botga qaytish</button>
+    <div class="footer-action">
+        <button class="btn-main" onclick="Telegram.WebApp.close()">Botga qaytish</button>
     </div>
 
     <script>
         const webapp = window.Telegram.WebApp;
         webapp.ready();
         webapp.expand();
-        webapp.enableClosingConfirmation();
-        
-        // Impactful feedback
+
+        function showTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            if (tabId === 'skills') {
+                setTimeout(() => {
+                    document.querySelectorAll('.skill-progress').forEach(p => {
+                        p.style.width = p.dataset.width;
+                    });
+                }, 100);
+            }
+        }
+
+        // Initialize Swiper
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 1.2,
+            spaceBetween: 20,
+            centeredSlides: true,
+            pagination: {
+                el: '.swiper-pagination',
+                dynamicBullets: true,
+            },
+        });
+
         webapp.HapticFeedback.impactOccurred('medium');
     </script>
 </body>

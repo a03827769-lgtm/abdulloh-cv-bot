@@ -226,7 +226,7 @@ async def cb_download_cv(callback: CallbackQuery):
     file_path = f"Abdulloh_CV_{lang}.pdf"
     
     await callback.message.answer("⏳ PDF tayyorlanmoqda\\.\\.\\.", parse_mode="MarkdownV2")
-    generate_cv_pdf(lang, file_path)
+    generate_cv_pdf(lang, file_path, callback.from_user.full_name)
     
     document = FSInputFile(file_path)
     await callback.message.answer_document(
