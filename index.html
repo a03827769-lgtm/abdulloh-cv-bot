@@ -6,7 +6,6 @@
     <title>Abdulloh | Elite Portfolio</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- Swiper.js for professional sliders -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <style>
@@ -37,7 +36,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background Elements */
         .bg-glow {
             position: fixed;
             width: 300px;
@@ -49,7 +47,6 @@
             border-radius: 50%;
         }
 
-        /* Tabs Navigation */
         .tabs-nav {
             position: fixed;
             top: 0;
@@ -81,7 +78,6 @@
             box-shadow: inset 0 0 0 1px var(--border);
         }
 
-        /* Content Sections */
         .content-section {
             display: none;
             padding: 80px 20px 20px;
@@ -95,7 +91,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero Card */
         .hero-card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -103,8 +98,6 @@
             padding: 30px;
             text-align: center;
             margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
         }
 
         .profile-img {
@@ -118,66 +111,18 @@
             justify-content: center;
             font-size: 48px;
             font-weight: 800;
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
         }
 
-        /* Skill Bars */
         .skill-container { margin-bottom: 20px; }
         .skill-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .skill-bar {
-            height: 8px;
-            background: var(--glass);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            width: 0;
-            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .skill-bar { height: 8px; background: var(--glass); border-radius: 4px; overflow: hidden; }
+        .skill-progress { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0; transition: width 1.5s ease; }
 
-        /* Project Slider */
-        .swiper {
-            width: 100%;
-            padding: 20px 0 50px;
-        }
-        .swiper-slide {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 20px;
-            height: auto;
-        }
-        .project-tag {
-            font-size: 11px;
-            background: var(--glass);
-            padding: 4px 10px;
-            border-radius: 10px;
-            color: var(--primary);
-            margin-bottom: 12px;
-            display: inline-block;
-        }
+        .swiper { width: 100%; padding: 20px 0 50px; }
+        .swiper-slide { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 20px; }
 
-        /* Footer Action */
-        .footer-action {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        .btn-main {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 18px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
-        }
+        .footer-action { position: fixed; bottom: 20px; left: 20px; right: 20px; z-index: 1000; }
+        .btn-main { background: var(--primary); color: white; border: none; width: 100%; padding: 18px; border-radius: 20px; font-weight: 700; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4); }
     </style>
 </head>
 <body>
@@ -185,101 +130,49 @@
     <div class="bg-glow" style="bottom: -100px; right: -100px; background: var(--accent);"></div>
 
     <nav class="tabs-nav">
-        <button class="tab-btn active" onclick="showTab('home')">Asosiy</button>
-        <button class="tab-btn" onclick="showTab('portfolio')">Portfolio</button>
-        <button class="tab-btn" onclick="showTab('skills')">Mahorat</button>
+        <button id="btn-home" class="tab-btn active" onclick="showTab('home')">Asosiy</button>
+        <button id="btn-portfolio" class="tab-btn" onclick="showTab('portfolio')">Portfolio</button>
+        <button id="btn-skills" class="tab-btn" onclick="showTab('skills')">Mahorat</button>
     </nav>
 
-    <!-- HOME SECTION -->
     <section id="home" class="content-section active">
         <div class="hero-card">
             <div class="profile-img">AM</div>
-            <h1 style="font-size: 28px; margin-bottom: 8px;">Abdulloh M.</h1>
-            <p style="color: var(--text-dim); margin-bottom: 20px;">Creative Developer & Mobilographer</p>
-            <div style="display: flex; justify-content: center; gap: 15px;">
-                <div style="background: var(--glass); padding: 12px; border-radius: 16px; min-width: 80px;">
-                    <h3 style="color: var(--primary);">1.5y</h3>
-                    <span style="font-size: 10px; color: var(--text-dim);">Tajriba</span>
-                </div>
-                <div style="background: var(--glass); padding: 12px; border-radius: 16px; min-width: 80px;">
-                    <h3 style="color: var(--accent);">10+</h3>
-                    <span style="font-size: 10px; color: var(--text-dim);">Loyihalar</span>
-                </div>
-            </div>
+            <h1>Abdulloh M.</h1>
+            <p style="color: var(--text-dim); margin-top: 5px;">Creative Developer & Mobilographer</p>
         </div>
-
-        <div class="hero-card" style="text-align: left; padding: 24px;">
-            <h3 style="margin-bottom: 12px;">🎯 Maqsadim</h3>
-            <p style="font-size: 14px; color: var(--text-dim); line-height: 1.6;">
-                Vizual san'at va yuqori texnologiyalarni birlashtirib, dunyo miqyosidagi raqamli mahsulotlar yaratish. Har bir kadr va har bir qator kod ortida sifat yotadi.
-            </p>
+        <div class="hero-card" style="text-align: left;">
+            <h3>✦ Maqsadim</h3>
+            <p style="color: var(--text-dim); font-size: 14px; margin-top: 10px; line-height: 1.6;">Innovatsion yechimlar va vizual san'at orqali bizneslarga qiymat qo'shish.</p>
         </div>
     </section>
 
-    <!-- PORTFOLIO SECTION -->
     <section id="portfolio" class="content-section">
-        <h2 style="margin-bottom: 10px;">🚀 Saralangan ishlar</h2>
+        <h2>📁 Portfolio</h2>
         <div class="swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <span class="project-tag">Mobilografiya</span>
-                    <h4>Cinematic Ad</h4>
-                    <p style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Professional 4K montaj va rangli korreksiya.</p>
-                </div>
-                <div class="swiper-slide">
-                    <span class="project-tag">Bot Development</span>
-                    <h4>Smart Balance</h4>
-                    <p style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">AI integratsiyali moliya boshqaruv tizimi.</p>
-                </div>
-                <div class="swiper-slide">
-                    <span class="project-tag">Development</span>
-                    <h4>Arenda Bot</h4>
-                    <p style="font-size: 12px; color: var(--text-dim); margin-top: 8px;">Ijara xizmatlarini avtomatlashtirish platformasi.</p>
-                </div>
+                <div class="swiper-slide"><h4>UPG Card</h4><p>Premium portfolio platform.</p></div>
+                <div class="swiper-slide"><h4>Smart Balance</h4><p>AI finance management.</p></div>
+                <div class="swiper-slide"><h4>Arenda Bot</h4><p>Infrastructure automation.</p></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
     </section>
 
-    <!-- SKILLS SECTION -->
     <section id="skills" class="content-section">
-        <h2 style="margin-bottom: 20px;">🛠 Mahorat darajasi</h2>
-        
+        <h2>🛠 Mahorat</h2>
         <div class="skill-container">
-            <div class="skill-header">
-                <span>Mobilografiya</span>
-                <span>95%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
+            <div class="skill-header"><span>Mobilografiya</span><span>95%</span></div>
+            <div class="skill-bar"><div class="skill-progress" style="--w: 95%"></div></div>
         </div>
-
         <div class="skill-container">
-            <div class="skill-header">
-                <span>Python (Bot/AI)</span>
-                <span>88%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-progress" data-width="88%"></div></div>
-        </div>
-
-        <div class="skill-container">
-            <div class="skill-header">
-                <span>SMM & Branding</span>
-                <span>80%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
-        </div>
-
-        <div class="skill-container">
-            <div class="skill-header">
-                <span>Web Development</span>
-                <span>75%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+            <div class="skill-header"><span>Python (AI)</span><span>88%</span></div>
+            <div class="skill-bar"><div class="skill-progress" style="--w: 88%"></div></div>
         </div>
     </section>
 
     <div class="footer-action">
-        <button class="btn-main" onclick="Telegram.WebApp.close()">Botga qaytish</button>
+        <button class="btn-main" onclick="Telegram.WebApp.close()">Yopish</button>
     </div>
 
     <script>
@@ -288,33 +181,30 @@
         webapp.expand();
 
         function showTab(tabId) {
+            // Remove active classes
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             
+            // Add active classes
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
 
             if (tabId === 'skills') {
                 setTimeout(() => {
                     document.querySelectorAll('.skill-progress').forEach(p => {
-                        p.style.width = p.dataset.width;
+                        p.style.width = p.style.getPropertyValue('--w');
                     });
                 }, 100);
             }
+            webapp.HapticFeedback.impactOccurred('light');
         }
 
-        // Initialize Swiper
-        const swiper = new Swiper('.swiper', {
+        new Swiper('.swiper', {
             slidesPerView: 1.2,
             spaceBetween: 20,
             centeredSlides: true,
-            pagination: {
-                el: '.swiper-pagination',
-                dynamicBullets: true,
-            },
+            pagination: { el: '.swiper-pagination', clickable: true }
         });
-
-        webapp.HapticFeedback.impactOccurred('medium');
     </script>
 </body>
 </html>
