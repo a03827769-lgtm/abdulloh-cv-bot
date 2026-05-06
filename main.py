@@ -2,66 +2,52 @@ import asyncio
 import logging
 import sys
 from aiogram import Bot, Dispatcher
-from aiogram.types import BotCommand, ErrorEvent
+from aiogram.fsm.storage.memory import MemoryStorage
 from config import BOT_TOKEN
 from handlers import router
+from middlewares import ThrottlingMiddleware, LoggingMiddleware
 from data.database import init_db
-from middlewares import AntiFloodMiddleware
 
-
-async def set_bot_commands(bot: Bot):
-    """Register bot commands so they appear when user types '/'."""
-    commands = [
-        BotCommand(command="start", description="Botni ishga tushirish"),
-        BotCommand(command="help", description="Buyruqlar ro'yxati"),
-        BotCommand(command="about", description="Men haqimda"),
-        BotCommand(command="portfolio", description="Portfolio"),
-        BotCommand(command="contact", description="Aloqa ma'lumotlari"),
-        BotCommand(command="language", description="Tilni o'zgartirish"),
+# Configure Professional Logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("data/bot.log"),
+        logging.StreamHandler(sys.stdout)
     ]
-    await bot.set_my_commands(commands)
-
+)
+logger = logging.getLogger(__name__)
 
 async def main():
-    """Main function to run the bot."""
-    # Logging (before everything else)
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-        stream=sys.stdout
-    )
-
-    # Initialize database
+    """Entry point for the Master CV Bot."""
+    # Initialize Database
     await init_db()
-
-    # Initialize Bot and Dispatcher
+    
+    # Initialize Bot & Dispatcher
     bot = Bot(token=BOT_TOKEN)
-    dp = Dispatcher()
+    dp = Dispatcher(storage=MemoryStorage())
 
-    # Register Middlewares
-    dp.message.middleware(AntiFloodMiddleware(time_limit=1))
+    # Register Middlewares (Anti-Spam & Analytics)
+    dp.message.middleware(ThrottlingMiddleware())
+    dp.update.outer_middleware(LoggingMiddleware())
 
-    # Register router
+    # Register Routers
     dp.include_router(router)
 
-    # Global Error Handler
-    @dp.error()
-    async def error_handler(event: ErrorEvent):
-        logging.error(f"Unhandled error: {event.exception}", exc_info=True)
-        return True
-
-    # Register bot commands (shows in "/" menu)
-    await set_bot_commands(bot)
-
-    logging.info("Bot is starting...")
+    logger.info("✦ MASTER CV BOT IS ONLINE ✦")
+    
     try:
-        await dp.start_polling(bot)
+        # Start Polling
+        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+    except Exception as e:
+        logger.error(f"Critical Error: {e}")
     finally:
         await bot.session.close()
-
+        logger.info("✦ BOT SHUTDOWN ✦")
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
-    except KeyboardInterrupt:
-        logging.info("Bot stopped by user.")
+    except (KeyboardInterrupt, SystemExit):
+        pass

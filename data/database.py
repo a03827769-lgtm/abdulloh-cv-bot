@@ -1,91 +1,111 @@
 import aiosqlite
-from config import DATABASE_PATH
 import os
+from datetime import datetime
+
+DATABASE_PATH = 'data/analytics.db'
 
 async def init_db():
-    """Initializes the database and creates tables if they don't exist."""
-    os.makedirs(os.path.dirname(DATABASE_PATH), exist_ok=True)
+    """Initializes the Master Analytics database."""
+    if not os.path.exists('data'):
+        os.makedirs('data')
+        
     async with aiosqlite.connect(DATABASE_PATH) as db:
+        # Users table with advanced tracking
         await db.execute('''
             CREATE TABLE IF NOT EXISTS users (
                 user_id INTEGER PRIMARY KEY,
                 username TEXT,
                 full_name TEXT,
-                language_code TEXT DEFAULT 'uz',
-                joined_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                language TEXT DEFAULT 'uz',
+                last_active TIMESTAMP,
+                joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
+        # Message and Action logs
+        await db.execute('''
+            CREATE TABLE IF NOT EXISTS logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                action TEXT,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        # AI Conversations
         await db.execute('''
             CREATE TABLE IF NOT EXISTS messages (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER,
+                role TEXT,
                 text TEXT,
-                response TEXT,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
         await db.commit()
 
-async def log_message(user_id: int, text: str, response: str):
-    """Logs user messages and AI responses for analytics."""
-    async with aiosqlite.connect(DATABASE_PATH) as db:
-        await db.execute('''
-            INSERT INTO messages (user_id, text, response)
-            VALUES (?, ?, ?)
-        ''', (user_id, text, response))
-        await db.commit()
-
 async def add_user(user_id: int, username: str, full_name: str):
-    """Adds a new user to the database."""
+    """Adds or updates a user in the Master Database."""
     async with aiosqlite.connect(DATABASE_PATH) as db:
+        now = datetime.now().isoformat()
         await db.execute('''
-            INSERT OR IGNORE INTO users (user_id, username, full_name)
-            VALUES (?, ?, ?)
-        ''', (user_id, username, full_name))
+            INSERT INTO users (user_id, username, full_name, last_active) 
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT(user_id) DO UPDATE SET 
+                username=excluded.username, 
+                full_name=excluded.full_name,
+                last_active=excluded.last_active
+        ''', (user_id, username, full_name, now))
         await db.commit()
 
-async def get_user_count():
-    """Returns the total number of users."""
+async def log_action(user_id: int, action: str):
+    """Logs every specific action for analytics (e.g., 'Clicked Portfolio')."""
     async with aiosqlite.connect(DATABASE_PATH) as db:
-        async with db.execute('SELECT COUNT(*) FROM users') as cursor:
-            row = await cursor.fetchone()
-            return row[0] if row else 0
-
-async def set_user_language(user_id: int, lang_code: str):
-    """Updates user language preference."""
-    async with aiosqlite.connect(DATABASE_PATH) as db:
-        await db.execute('UPDATE users SET language_code = ? WHERE user_id = ?', (lang_code, user_id))
+        await db.execute('INSERT INTO logs (user_id, action) VALUES (?, ?)', (user_id, action))
         await db.commit()
 
 async def get_user_language(user_id: int) -> str:
-    """Returns user's selected language."""
     async with aiosqlite.connect(DATABASE_PATH) as db:
-        async with db.execute('SELECT language_code FROM users WHERE user_id = ?', (user_id,)) as cursor:
+        async with db.execute('SELECT language FROM users WHERE user_id = ?', (user_id,)) as cursor:
             row = await cursor.fetchone()
             return row[0] if row else 'uz'
+
+async def set_user_language(user_id: int, lang: str):
+    async with aiosqlite.connect(DATABASE_PATH) as db:
+        await db.execute('UPDATE users SET language = ? WHERE user_id = ?', (lang, user_id))
+        await db.commit()
+
+async def log_message(user_id: int, text: str, response: str):
+    """Logs AI conversations for history and refinement."""
+    async with aiosqlite.connect(DATABASE_PATH) as db:
+        await db.execute('INSERT INTO messages (user_id, role, text) VALUES (?, ?, ?)', (user_id, 'user', text))
+        await db.execute('INSERT INTO messages (user_id, role, text) VALUES (?, ?, ?)', (user_id, 'assistant', response))
+        await db.commit()
+
+async def get_user_count():
+    async with aiosqlite.connect(DATABASE_PATH) as db:
+        async with db.execute('SELECT COUNT(*) FROM users') as cursor:
+            return (await cursor.fetchone())[0]
+
 async def get_all_users():
-    """Returns all user IDs for broadcasting."""
     async with aiosqlite.connect(DATABASE_PATH) as db:
         async with db.execute('SELECT user_id FROM users') as cursor:
             rows = await cursor.fetchall()
             return [row[0] for row in rows]
 
 async def get_detailed_stats():
-    """Returns comprehensive analytics for the admin."""
+    """Returns Master-level stats for admin."""
     async with aiosqlite.connect(DATABASE_PATH) as db:
-        # Total messages
+        async with db.execute('SELECT COUNT(*) FROM users') as c:
+            u_count = (await c.fetchone())[0]
         async with db.execute('SELECT COUNT(*) FROM messages') as c:
-            msg_count = (await c.fetchone())[0]
-        # AI specific questions (those starting with AI tag or from AI mode)
-        async with db.execute('SELECT COUNT(*) FROM messages WHERE text NOT LIKE "/%"') as c:
-            ai_count = (await c.fetchone())[0]
-        return {
-            "messages": msg_count,
-            "ai_queries": ai_count
-        }
+            m_count = (await c.fetchone())[0]
+        # Most popular action
+        async with db.execute('SELECT action, COUNT(action) as c FROM logs GROUP BY action ORDER BY c DESC LIMIT 1') as c:
+            pop = await c.fetchone()
+            pop_action = f"{pop[0]} ({pop[1]})" if pop else "N/A"
+            
+        return {"users": u_count, "messages": m_count, "popular": pop_action}
 
 async def get_recent_users(limit=10):
-    """Returns the list of most recent users."""
     async with aiosqlite.connect(DATABASE_PATH) as db:
-        async with db.execute('SELECT user_id, full_name, username FROM users ORDER BY joined_at DESC LIMIT ?', (limit,)) as cursor:
+        async with db.execute('SELECT user_id, full_name, username FROM users ORDER BY last_active DESC LIMIT ?', (limit,)) as cursor:
             return await cursor.fetchall()

@@ -1,4 +1,8 @@
-"""CV content data with Professional Case Studies and FAQ."""
+"""
+ULTRA PROFESSIONAL CONTENT DATA - ABDULLOH CV BOT v3.0
+Language: Multi-language (UZ, RU, EN)
+Style: Elite Agency Minimalist
+"""
 
 CV_DATA = {
     "name": "Muhammadjonov Abdulloh",
@@ -14,81 +18,46 @@ CV_DATA = {
         "major": "Economics & Mathematics",
         "year": "1st Year",
     },
+    "experience": [
+        {
+            "title": "Creative Director & Mobilographer",
+            "duration": "1.5 Years",
+            "desc": {
+                "uz": "Cinematic kontentlar yaratish orqali brendlarni vizual darajasini ko'tarish. 100+ dan ortiq muvaffaqiyatli Reels va reklama roliklari.",
+                "ru": "Повышение визуального уровня брендов через создание кинематографического контента. Более 100 успешных Reels и рекламных роликов.",
+                "en": "Elevating brand visual identity through cinematic content creation. Over 100+ successful Reels and commercial videos."
+            }
+        },
+        {
+            "title": "AI & Bot Infrastructure Developer",
+            "duration": "1 Year",
+            "desc": {
+                "uz": "Python va AI texnologiyalari yordamida biznes jarayonlarini 80% gacha avtomatlashtiruvchi ekotizimlar yaratish.",
+                "ru": "Создание экосистем, автоматизирующих бизнес-процессы до 80% с использованием технологий Python и AI.",
+                "en": "Building ecosystems that automate business processes by up to 80% using Python and AI technologies."
+            }
+        }
+    ],
+    "skills": {
+        "technical": ["Mobilography", "Python (AI/FastAPI)", "React/Next.js", "Prompt Engineering", "Digital Marketing"],
+        "soft": ["Strategic Thinking", "Discipline", "Leadership", "Fast Learning"]
+    },
     "projects": [
         {
             "name": "UPG Card",
-            "type": "Production",
-            "uz": "◈ *Muammo:* Mijozlar uchun portfoliosini ko'rsatish murakkab edi.\n◈ *Yechim:* Premium vizitka va bot tizimi yaratildi.\n◈ *Natija:* 50+ mijozlar oqimi.",
-            "ru": "◈ *Проблема:* Сложность в демонстрации портфолио.\n◈ *Решение:* Создана система премиум-визиток и ботов.\n◈ *Результат:* Поток из 50+ клиентов.",
-            "en": "◈ *Problem:* Difficulty in showcasing portfolios.\n◈ *Solution:* Premium business card and bot system created.\n◈ *Result:* Inflow of 50+ clients."
+            "type": "Product",
+            "uz": "◈ *Missiya:* Biznes egalari uchun raqamli identifikatsiyani osonlashtirish.\n◈ *Yutuq:* 50+ dan ortiq faol foydalanuvchilar va barqaror tizim.",
+            "ru": "◈ *Миссия:* Упрощение цифровой идентификации для владельцев бизнеса.\n◈ *Достижение:* Более 50+ активных пользователей и стабильная система.",
+            "en": "◈ *Mission:* Simplifying digital identification for business owners.\n◈ *Result:* Over 50+ active users and a highly stable system."
         },
         {
             "name": "Smart Balance",
-            "type": "AI System",
-            "uz": "◈ *Muammo:* Moliya boshqaruvida inson omili xatolari.\n◈ *Yechim:* AI integratsiyali Mini App tizimi.\n◈ *Natija:* 99% hisob-kitob aniqligi.",
-            "ru": "◈ *Проблема:* Человеческий фактор в финансах.\n◈ *Решение:* Mini App с AI интеграцией.\n◈ *Результат:* 99% точность расчетов.",
-            "en": "◈ *Problem:* Human error in finance management.\n◈ *Solution:* AI-integrated Mini App system.\n◈ *Result:* 99% calculation accuracy."
+            "type": "AI Tool",
+            "uz": "◈ *Missiya:* Kichik biznes moliya tizimini tartibga solish.\n◈ *Yutuq:* AI yordamida xatolarni 0% ga tushirish va vaqtni tejash.",
+            "ru": "◈ *Миссия:* Организация финансовой системы малого бизнеса.\n◈ *Достижение:* Снижение ошибок до 0% с помощью AI и экономия времени.",
+            "en": "◈ *Mission:* Organizing small business financial systems.\n◈ *Result:* Reducing errors to 0% with AI and significant time savings."
         }
-    ],
-    "experience": [
-        {"title": "Mobilographer & Director", "duration": "1.5 Years"},
-        {"title": "Full-Stack Developer", "duration": "1 Year"},
-        {"title": "SMM Strategist", "duration": "5 Months"},
-        {"title": "Car Detailing Expert", "duration": "1 Year"}
-    ],
-    "skills": {
-        "technical": ["Mobilography", "Python (AI/FastAPI)", "React", "SMM"],
-        "soft": ["Leadership", "Analytical Thinking", "Creativity"]
-    }
-}
-
-FAQ_DATA = {
-    "uz": (
-        f"✦ *KO'P BERILADIGAN SAVOLLAR*\n"
-        f"──────────────────────────\n\n"
-        f"◈ *Qaysi dasturlarda ishlaysiz?*\n"
-        f"└ Adobe Premiere, CapCut, Python (Aiogram/FastAPI), React\\.\n\n"
-        f"◈ *Hamkorlik shartlari qanday?*\n"
-        f"└ Har bir loyiha individual yondashuv va shartnoma asosida kelishiladi\\.\n\n"
-        f"◈ *Ish vaqtingiz?*\n"
-        f"└ Moslashuvchan grafik, asosan 10:00 — 20:00\\.\n\n"
-        f"◈ *Siz bilan qanday bog'lanish mumkin?*\n"
-        f"└ Botdagi 'Aloqa' bo'limi yoki to'g'ridan-to'g'ri @abdulloh\\_ai orqali\\."
-    ),
-    "ru": (
-        f"✦ *ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ*\n"
-        f"──────────────────────────\n\n"
-        f"◈ *В каких программах работаете?*\n"
-        f"└ Adobe Premiere, CapCut, Python, React\\.\n\n"
-        f"◈ *Условия сотрудничества?*\n"
-        f"└ Каждый проект обсуждается индивидуально на основе договора\\.\n\n"
-        f"◈ *График работы?*\n"
-        f"└ Гибкий график, в основном 10:00 — 20:00\\.\n\n"
-        f"◈ *Как с вами связаться?*\n"
-        f"└ Через раздел 'Контакты' или напрямую @abdulloh\\_ai\\."
-    ),
-    "en": (
-        f"✦ *FREQUENTLY ASKED QUESTIONS*\n"
-        f"──────────────────────────\n\n"
-        f"◈ *What software do you use?*\n"
-        f"└ Adobe Premiere, CapCut, Python, React\\.\n\n"
-        f"◈ *What are the cooperation terms?*\n"
-        f"└ Each project is negotiated individually based on a contract\\.\n\n"
-        f"◈ *Working hours?*\n"
-        f"└ Flexible schedule, mainly 10:00 AM — 8:00 PM\\.\n\n"
-        f"◈ *How to contact you?*\n"
-        f"└ Through the 'Contact' section or directly via @abdulloh\\_ai\\."
-    )
-}
-
-# ━━━━━━━━━━━━━━━━━━━━
-# MEDIA & FORMATTING (Kept for compatibility)
-# ━━━━━━━━━━━━━━━━━━━━
-
-MEDIA = {
-    "start": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
-    "about": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-    "mobilography": "https://v1.pinimg.com/videos/mc/720p/f1/8c/6b/f18c6b7d3453716d1f568a86576b5d9d.mp4",
+    ]
 }
 
 H = "──────────────────────────"
@@ -98,37 +67,48 @@ MESSAGES = {
         "start": (
             f"✦ *MUHAMMADJONOV ABDULLOH*\n"
             f"{H}\n\n"
-            f"Creative Director  ·  Developer  ·  AI Engineer\n\n"
-            f"Assalomu alaykum\\. Abdullohning raqamli ekotizimiga xush kelibsiz\\.\n"
+            f"Creative Director  ·  AI Developer  ·  SMM Strategist\n\n"
+            f"Assalomu alaykum\\. Siz hozirda Abdullohning shaxsiy raqamli asisstenti bilan muloqot qilyapsiz\\. "
             f"Sizga qanday yordam bera olaman?"
         ),
-        "menu": "Pastdagi menyudan foydalaning ⬦",
+        "menu": "Pastdagi elite menyudan foydalaning ⬦",
         "about": (
-            f"✦ *PERSONAL PROFILE*\n"
+            f"✦ *PROFESSIONAL PROFILE*\n"
             f"{H}\n\n"
-            f"Abdulloh — texnologiya va vizual san'at chegarasida ishlovchi mutaxassis\\.\n\n"
-            f"◈ *Ta'lim:* Nordic University\n"
-            f"◈ *Manzil:* Toshkent, O'zbekiston\n"
-            f"◈ *Yutuq:* Taekwondo — 5 yillik intizom va medallar\n\n"
-            f"_Sifat — bu bizning asosiy tamoyilimiz\\._"
+            f"Men — Abdulloh Muhammadjonov, zamonaviy texnologiyalar va vizual san'atni birlashtirgan holda innovatsion yechimlar yarataman\\.\n\n"
+            f"◈ *Ta'lim:* Nordic University \\(Iqtisodiyot va Matematika\\)\n"
+            f"◈ *Tajriba:* Mobilografiya, Dasturlash va AI tizimlari\\.\n"
+            f"◈ *Tamoyilim:* 'Sifat — bu shunchaki talab emas, bu bizning brendimizdir\\.'\n\n"
+            f"_Abdulloh bilan ishlash — bu kelajak texnologiyalarini bugun qo'llash demakdir\\._"
         ),
         "portfolio": (
-            f"✦ *VISUAL PORTFOLIO*\n"
+            f"✦ *EXPERT PORTFOLIO*\n"
             f"{H}\n\n"
-            f"Loyihalarni kategoriyalar bo'yicha tanlang:"
+            f"Mening ijodiy va texnik ishlarimni quyidagi bo'limlar orqali ko'rishingiz mumkin:"
         ),
         "contact": (
             f"✦ *CONNECT*\n"
             f"{H}\n\n"
-            f"Hamkorlik yoki savollar uchun aloqaga chiqing:"
+            f"Muvaffaqiyatli hamkorlikni hoziroq boshlash uchun quyidagi tugmalarni bosing:"
         ),
         "ai_intro": (
-            f"🤖 *AI YORDAMCHI REJIMIDA*\n"
+            f"🤖 *AI ASSISTANT ACTIVATED*\n"
             f"{H}\n\n"
-            f"Men Abdullohning barcha loyihalari va tajribasi haqida ma'lumotga egaman\\.\n"
-            f"Menga xohlagan savolingizni berishingiz mumkin\\.\n\n"
-            f"_Chiqish uchun 'Ortga' tugmasini bosing\\._"
+            f"Men Abdullohning barcha loyihalari va imkoniyatlari haqida to'liq ma'lumotga egaman\\. "
+            f"Savollaringizni bemalol berishingiz mumkin\\.\n\n"
+            f"_Chiqish uchun '⬅️ Ortga' tugmasini bosing\\._"
         ),
+        "faq": (
+            f"✦ *ESSENTIAL FAQ*\n"
+            f"{H}\n\n"
+            f"◈ *Qaysi yo'nalishlarda hamkorlik qilasiz?*\n"
+            f"└ Videomontaj, Botlar yaratish va Brend dizayni\\.\n\n"
+            f"◈ *Ish jarayoni qancha davom etadi?*\n"
+            f"└ Loyiha murakkabligiga qarab 3 kundan 2 haftagacha\\.\n\n"
+            f"◈ *Narxlar qanday?*\n"
+            f"└ Har bir loyiha budjeti individual belgilanadi\\."
+        ),
+        "lang_select": "🌐 Master Interface: Select Language",
         "buttons": {
             "about": "👤 Profil",
             "experience": "💼 Tajriba",
@@ -139,44 +119,56 @@ MESSAGES = {
             "hire": "🤝 Hamkorlik",
             "mini_app": "🚀 Web CV",
             "ai_chat": "🤖 AI Yordamchi",
-            "faq": "❓ FAQ"
+            "faq": "❓ FAQ",
+            "back": "⬅️ Ortga"
         }
     },
     "ru": {
         "start": (
             f"✦ *МУХАММАДЖОНОВ АБДУЛЛОХ*\n"
             f"{H}\n\n"
-            f"Креативный директор  ·  Разработчик  ·  AI Инженер\n\n"
-            f"Добро пожаловать в цифровую экосистему Абдуллоха\\.\n"
-            f"Чем я могу вам помочь?"
+            f"Креативный директор  ·  AI Разработчик  ·  SMM Стратег\n\n"
+            f"Здравствуйте\\. Вы находитесь в цифровом пространстве Абдуллоха\\. "
+            f"Чем я могу быть вам полезен?"
         ),
-        "menu": "Используйте меню ниже ⬦",
+        "menu": "Используйте элитное меню ниже ⬦",
         "about": (
-            f"✦ *ПЕРСОНАЛЬНЫЙ ПРОФИЛЬ*\n"
+            f"✦ *ПРОФЕССИОНАЛЬНЫЙ ПРОФИЛЬ*\n"
             f"{H}\n\n"
-            f"Абдуллох — специалист, работающий на стыке технологий и искусства\\.\n\n"
-            f"◈ *Учеба:* Nordic University\n"
-            f"◈ *Локация:* Ташкент, Узбекистан\n"
-            f"◈ *Спорт:* Тхэквондо — 5 лет дисциплины и медалей\n\n"
-            f"_Качество — наш главный принцип\\._"
+            f"Я — Абдуллох Мухаммаджонов, создаю инновационные решения на стыке технологий и визуального искусства\\.\n\n"
+            f"◈ *Учеба:* Nordic University \\(Экономика и Математика\\)\n"
+            f"◈ *Опыт:* Мобилография, Разработка и AI системы\\.\n"
+            f"◈ *Принцип:* 'Качество — это не просто требование, это наш бренд\\.'\n\n"
+            f"_Работа с Абдуллохом — это использование технологий будущего уже сегодня\\._"
         ),
         "portfolio": (
-            f"✦ *ПОРТФОЛИО*\n"
+            f"✦ *ЭКСПЕРТНОЕ ПОРТФОЛИО*\n"
             f"{H}\n\n"
-            f"Выберите категорию проектов:"
+            f"Ознакомьтесь с моими работами в следующих разделах:"
         ),
         "contact": (
             f"✦ *СВЯЗЬ*\n"
             f"{H}\n\n"
-            f"Свяжитесь для сотрудничества или вопросов:"
+            f"Начните успешное сотрудничество прямо сейчас:"
         ),
         "ai_intro": (
-            f"🤖 *РЕЖИМ AI ПОМОЩНИКА*\n"
+            f"🤖 *AI ПОМОЩНИК АКТИВИРОВАН*\n"
             f"{H}\n\n"
-            f"Я знаю всё о проектах и опыте Абдуллоха\\.\n"
-            f"Вы можете задать мне любой вопрос\\.\n\n"
-            f"_Для выхода нажмите 'Назад'\\._"
+            f"Я владею полной информацией о проектах и возможностях Абдуллоха\\. "
+            f"Задавайте любые вопросы\\.\n\n"
+            f"_Для выхода нажмите '⬅️ Назад'\\._"
         ),
+        "faq": (
+            f"✦ *ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ*\n"
+            f"{H}\n\n"
+            f"◈ *В каких направлениях вы сотрудничаете?*\n"
+            f"└ Видеомонтаж, создание ботов и дизайн бренда\\.\n\n"
+            f"◈ *Сколько длится рабочий процесс?*\n"
+            f"└ От 3 дней до 2 недель в зависимости от сложности\\.\n\n"
+            f"◈ *Каковы цены?*\n"
+            f"└ Бюджет каждого проекта определяется индивидуально\\."
+        ),
+        "lang_select": "🌐 Master Interface: Выберите язык",
         "buttons": {
             "about": "👤 Профиль",
             "experience": "💼 Опыт",
@@ -187,44 +179,56 @@ MESSAGES = {
             "hire": "🤝 Сотрудничество",
             "mini_app": "🚀 Web CV",
             "ai_chat": "🤖 AI Помощник",
-            "faq": "❓ FAQ"
+            "faq": "❓ FAQ",
+            "back": "⬅️ Назад"
         }
     },
     "en": {
         "start": (
             f"✦ *ABDULLOH MUHAMMADJONOV*\n"
             f"{H}\n\n"
-            f"Creative Director  ·  Developer  ·  AI Engineer\n\n"
-            f"Welcome to Abdulloh's digital ecosystem\\.\n"
-            f"How may I assist you today?"
+            f"Creative Director  ·  AI Developer  ·  SMM Strategist\n\n"
+            f"Hello\\. You are communicating with Abdulloh's personal digital assistant\\. "
+            f"How can I help you today?"
         ),
-        "menu": "Use the menu below ⬦",
+        "menu": "Use the elite menu below ⬦",
         "about": (
-            f"✦ *PERSONAL PROFILE*\n"
+            f"✦ *PROFESSIONAL PROFILE*\n"
             f"{H}\n\n"
-            f"Abdulloh is a specialist working at the edge of tech and visual arts\\.\n\n"
-            f"◈ *Education:* Nordic University\n"
-            f"◈ *Location:* Tashkent, Uzbekistan\n"
-            f"◈ *Achievements:* 5 years of Taekwondo discipline\n\n"
-            f"_Quality is our primary principle\\._"
+            f"I am Abdulloh Muhammadjonov, creating innovative solutions by combining modern technology and visual arts\\.\n\n"
+            f"◈ *Education:* Nordic University \\(Economics & Mathematics\\)\n"
+            f"◈ *Expertise:* Mobilography, Coding, and AI Systems\\.\n"
+            f"◈ *Principle:* 'Quality is not just a requirement, it is our brand\\.'\n\n"
+            f"_Working with Abdulloh means applying tomorrow's technology today\\._"
         ),
         "portfolio": (
-            f"✦ *PORTFOLIO*\n"
+            f"✦ *EXPERT PORTFOLIO*\n"
             f"{H}\n\n"
-            f"Select a project category:"
+            f"You can view my creative and technical work through the sections below:"
         ),
         "contact": (
             f"✦ *CONNECT*\n"
             f"{H}\n\n"
-            f"Get in touch for collaboration or inquiries:"
+            f"Start a successful collaboration right now:"
         ),
         "ai_intro": (
-            f"🤖 *AI ASSISTANT MODE*\n"
+            f"🤖 *AI ASSISTANT ACTIVATED*\n"
             f"{H}\n\n"
-            f"I have full knowledge of Abdulloh's projects and experience\\.\n"
-            f"Feel free to ask me anything\\.\n\n"
-            f"_Click 'Back' to exit AI mode\\._"
+            f"I have full information about Abdulloh's projects and capabilities\\. "
+            f"Feel free to ask any questions\\.\n\n"
+            f"_Click '⬅️ Back' to exit AI mode\\._"
         ),
+        "faq": (
+            f"✦ *ESSENTIAL FAQ*\n"
+            f"{H}\n\n"
+            f"◈ *In which areas do you collaborate?*\n"
+            f"└ Video editing, Bot creation, and Brand design\\.\n\n"
+            f"◈ *How long does the work process take?*\n"
+            f"└ 3 days to 2 weeks depending on complexity\\.\n\n"
+            f"◈ *What are the prices?*\n"
+            f"└ Each project budget is set individually\\."
+        ),
+        "lang_select": "🌐 Master Interface: Select Language",
         "buttons": {
             "about": "👤 Profile",
             "experience": "💼 Experience",
@@ -235,30 +239,27 @@ MESSAGES = {
             "hire": "🤝 Hire Me",
             "mini_app": "🚀 Web CV",
             "ai_chat": "🤖 AI Assistant",
-            "faq": "❓ FAQ"
+            "faq": "❓ FAQ",
+            "back": "⬅️ Back"
         }
     }
 }
 
 PORTFOLIO_DATA = {
     "mob": {
-        "uz": "📸 *Mobilografiya*\n\n◈ *Project:* Cinematic Ad\n◈ *Muammo:* Mahsulotni dinamik ko'rsatish kerak edi.\n◈ *Natija:* Sifatli kadrlar va brend taniluvchanligi oshishi.",
-        "ru": "📸 *Мобилография*\n\n◈ *Проект:* Cinematic Ad\n◈ *Проблема:* Нужна динамика продукта.\n◈ *Результат:* Рост узнаваемости бренда.",
-        "en": "📸 *Mobilography*\n\n◈ *Project:* Cinematic Ad\n◈ *Problem:* Product needed dynamic visuals.\n◈ *Result:* High quality frames and brand awareness."
+        "uz": "📸 *Mobilografiya Galereyasi*\n\nLoyihalarimda yuqori sifatli cinematic yondashuvdan foydalanaman\\.\n◈ *Natija:* Tomoshabinlar e'tiborini 80% ko'proq ushlab turuvchi kontentlar\\.",
+        "ru": "📸 *Галерея Мобилографии*\n\nВ проектах я использую качественный кинематографический подход\\.\n◈ *Результат:* Контент, удерживающий внимание зрителей на 80% эффективнее\\.",
+        "en": "📸 *Mobilography Gallery*\n\nI use a high-quality cinematic approach in my projects\\.\n◈ *Result:* Content that retains audience attention 80% more effectively\\."
     },
     "code": {
-        "uz": "💻 *Development*\n\n◈ CV Bot (Master Level)\n◈ Smart Balance App (AI)\n◈ Arenda Bot Infrastructure",
-        "ru": "💻 *Разработка*\n\n◈ CV Bot (Master Level)\n◈ Smart Balance App (AI)\n◈ Arenda Bot Infrastructure",
-        "en": "💻 *Development*\n\n◈ CV Bot (Master Level)\n◈ Smart Balance App (AI)\n◈ Arenda Bot Infrastructure"
-    },
-    "ai": {
-        "uz": "🤖 *AI Solutions*\n\n◈ AI Content Creation\n◈ Post Design & Strategy",
-        "ru": "🤖 *AI Решения*\n\n◈ AI Создание контента\n◈ Пост-дизайн и стратегия",
-        "en": "🤖 *AI Solutions*\n\n◈ AI Content Creation\n◈ Post Design & Strategy"
-    },
-    "car": {
-        "uz": "🚗 *Automotive*\n\n◈ Detailing & Protection\n◈ Professional Experience: 1 year",
-        "ru": "🚗 *Автомобили*\n\n◈ Детейлинг и защита\n◈ Профессиональный опыт: 1 год",
-        "en": "🚗 *Automotive*\n\n◈ Detailing & Protection\n◈ Professional Experience: 1 year"
+        "uz": "💻 *Development Showcase*\n\n◈ *CV Bot:* Ushbu bot — mening to'liq imkoniyatlarim namunasi\\.\n◈ *Smart Balance:* AI bilan integratsiyalangan moliyaviy yordamchi\\.\n◈ *Arenda Bot:* Biznes jarayonlarini avtomatlashtirish tizimi\\.",
+        "ru": "💻 *Витрина Разработки*\n\n◈ *CV Bot:* Этот бот — пример моих полных возможностей\\.\n◈ *Smart Balance:* Финансовый помощник с интеграцией AI\\.\n◈ *Arenda Bot:* Система автоматизации бизнес-процессов\\.",
+        "en": "💻 *Development Showcase*\n\n◈ *CV Bot:* This bot is a prime example of my full capabilities\\.\n◈ *Smart Balance:* Financial assistant with AI integration\\.\n◈ *Arenda Bot:* Business process automation system\\."
     }
+}
+
+MEDIA = {
+    "start": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
+    "about": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    "mobilography": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
 }

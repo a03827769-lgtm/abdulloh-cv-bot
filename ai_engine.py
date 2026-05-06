@@ -1,123 +1,78 @@
-import httpx
-from openai import AsyncOpenAI
 import logging
-from config import GROQ_API_KEY, GROQ_BASE_URL, GROQ_MODEL, DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL
-from content import CV_DATA
+from openai import AsyncOpenAI
+from config import GROQ_API_KEY, DEEPSEEK_API_KEY
+from content import CV_DATA, CV_DATA
+import os
 
-# Setup logging for AI engine
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("AI_ENGINE")
+# Initialize AI Client with fallback to Groq for speed
+client = AsyncOpenAI(api_key=GROQ_API_KEY, base_url="https://api.groq.com/openai/v1")
 
-# Initialize AI client
-client = None
-MODEL_NAME = None
-PROVIDER = None
-
-# Debug: check loaded keys (masked for security)
-def mask(key: str):
-    if not key: return "None"
-    if len(key) < 8: return "***"
-    return f"{key[:5]}...{key[-3:]}"
-
-logger.info(f"DEBUG: GROQ_API_KEY loaded: {mask(GROQ_API_KEY)}")
-logger.info(f"DEBUG: DEEPSEEK_API_KEY loaded: {mask(DEEPSEEK_API_KEY)}")
-
-# Logic to pick the provider
-if GROQ_API_KEY and not GROQ_API_KEY.startswith("gsk_your_key") and len(GROQ_API_KEY) > 10:
-    http_client = httpx.AsyncClient()
-    client = AsyncOpenAI(
-        api_key=GROQ_API_KEY.strip(),
-        base_url=GROQ_BASE_URL,
-        http_client=http_client
-    )
-    MODEL_NAME = GROQ_MODEL
-    PROVIDER = "Groq"
-    logger.info(f"AI Provider initialized: {PROVIDER} ({MODEL_NAME})")
-elif DEEPSEEK_API_KEY and not DEEPSEEK_API_KEY.startswith("sk-your-key") and len(DEEPSEEK_API_KEY) > 10:
-    http_client = httpx.AsyncClient()
-    client = AsyncOpenAI(
-        api_key=DEEPSEEK_API_KEY.strip(),
-        base_url=DEEPSEEK_BASE_URL,
-        http_client=http_client
-    )
-    MODEL_NAME = "deepseek-chat"
-    PROVIDER = "DeepSeek"
-    logger.info(f"AI Provider initialized: {PROVIDER}")
-else:
-    logger.warning("No valid AI API Key found in .env! AI features will be disabled.")
-
-# Memory for conversation history {user_id: [messages]}
+# Conversation Memory
 USER_HISTORY = {}
-MAX_HISTORY = 10 
+MAX_HISTORY = 10
 
-def get_system_prompt(lang_name: str) -> str:
-    """Generates a highly detailed system prompt for the AI assistant."""
-    projects_list = "\n".join([f"- {p['name']} ({p['type']}): {p['desc']}" for p in CV_DATA['projects']])
-    exp_list = "\n".join([f"- {e['title']} ({e['duration']})" for e in CV_DATA['experience']])
+def get_system_prompt(lang: str) -> str:
+    """Master Level Sales Closer System Prompt."""
+    lang_map = {"uz": "O'zbek", "ru": "Русском", "en": "English"}
+    l_name = lang_map.get(lang, "O'zbek")
+    
+    projects = "\n".join([f"- {p['name']} ({p['type']}): {p[lang]}" for p in CV_DATA['projects']])
+    skills = ", ".join(CV_DATA['skills']['technical'])
     
     return f"""
-Siz Muhammadjonov Abdulloh (@abdulloh_ai) ismli yuqori darajali mutaxassisning "Elite AI" assistentisiz. 
+You are the personal AI Assistant of Abdulloh Muhammadjonov. Your goal is to represent him as a TOP-TIER Professional.
+Response Language: {l_name}.
 
-ABDULLOH HAQIDAGI STRATEGIK MA'LUMOTLAR:
-- To'liq ismi: {CV_DATA['name']}
-- Mutaxassisligi: Mobilograf (Cinematic Content Creator), Full-Stack Bot Developer, AI Engineering va SMM Strategist.
-- Ta'lim: Nordic University (Iqtisodiyot va Matematik tahlil bo'yicha chuqur bilimga ega).
-- Sport: Taekwondo bo'yicha 5 yillik tajriba va medallar sohibi (bu uning intizomi va irodasini ko'rsatadi).
+CONTEXT:
+- Abdulloh is an expert in Mobilography, AI Bot Development, and SMM.
+- He is a student at Nordic University with high discipline (Taekwondo experience).
+- PROJECTS:
+{projects}
+- SKILLS: {skills}
 
-SIZNING ELITE VAZIFANGIZ:
-1. Siz nafaqat savollarga javob berasiz, balki Abdullohning brendini eng yuqori darajada taqdim etasiz. 
-2. Javoblaringiz samimiy, intellektual va professional bo'lishi shart.
-3. Abdullohning ish tajribasi (Mobilografiya, Bot yaratish, Car Detailing) haqida so'rashsa, uning har tomonlama rivojlangan ("Polymath") shaxs ekanligini ta'kidlang.
-4. Agar foydalanuvchi hamkorlik taklif qilsa, uni "Hire Me" (Hamkorlik) bo'limiga yo'naltiring.
-5. Foydalanuvchi tili ({lang_name}) da mukammal darajada javob bering.
-
-MUHIM: Har bir javobingizda Abdullohning kreativligi va texnik bilimini uyg'unlashtira olishini (vizual kadr + murakkab kod) aks ettiring.
+RULES:
+1. Tone: Elite, confident, minimalist, and extremely helpful.
+2. If asked about his background, emphasize his discipline and innovative approach.
+3. If asked about price, say: "Har bir loyiha individual yondashuvni talab qiladi. Aniqroq ma'lumot uchun 'Hamkorlik' bo'limi orqali so'rov yuborishingiz mumkin."
+4. Use professional symbols (✦, ◈) to structure your answers.
+5. Always try to lead the user towards booking a consultation or looking at the portfolio.
+6. Keep answers concise but high-value.
 """
 
-async def get_ai_response(user_text: str, user_id: int, lang: str = "uz") -> str:
-    """Gets response from AI with conversation history."""
-    lang_names = {"uz": "O'zbek", "ru": "Русский", "en": "English"}
-    lang_name = lang_names.get(lang, "O'zbek")
-    
-    if not client:
-        return "⚠️ AI tizimi hozircha ulanmagan. Iltimos, .env faylini tekshiring."
-
+async def get_ai_response(text: str, user_id: int, lang: str = "uz") -> str:
+    """Fetches AI response with context awareness and retry logic."""
     if user_id not in USER_HISTORY:
-        USER_HISTORY[user_id] = [{"role": "system", "content": get_system_prompt(lang_name)}]
-
-    USER_HISTORY[user_id].append({"role": "user", "content": user_text})
+        USER_HISTORY[user_id] = [{"role": "system", "content": get_system_prompt(lang)}]
     
+    USER_HISTORY[user_id].append({"role": "user", "content": text})
+    
+    # Trim history if too long
     if len(USER_HISTORY[user_id]) > MAX_HISTORY:
-        USER_HISTORY[user_id] = [USER_HISTORY[user_id][0]] + USER_HISTORY[user_id][-(MAX_HISTORY-1):]
+        USER_HISTORY[user_id] = [USER_HISTORY[user_id][0]] + USER_HISTORY[user_id][-MAX_HISTORY:]
 
     try:
-        response = await client.chat.completions.create(
-            model=MODEL_NAME,
+        completion = await client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
             messages=USER_HISTORY[user_id],
-            temperature=0.6,
-            max_tokens=800
+            temperature=0.7,
+            max_tokens=1000
         )
-        ai_text = response.choices[0].message.content
-        USER_HISTORY[user_id].append({"role": "assistant", "content": ai_text})
-        return ai_text
+        response = completion.choices[0].message.content
+        USER_HISTORY[user_id].append({"role": "assistant", "content": response})
+        return response
     except Exception as e:
-        logger.error(f"{PROVIDER} AI Error: {e}")
-        if "402" in str(e) or "balance" in str(e).lower() or "limit" in str(e).lower():
-            return f"⚠️ Kechirasiz, {PROVIDER} AI xizmati balansida mablag' yoki limit tugagan. Iltimos, @abdulloh_ai ga xabar bering."
-        return f"⚠️ AI xatolik: {str(e)[:50]}..."
+        logging.error(f"AI Error: {e}")
+        return "✦ Kechirasiz, tizimda vaqtinchalik uzilish yuz berdi. Iltimos, birozdan so'ng urinib ko'ring."
+
 async def transcribe_voice(file_path: str) -> str:
-    """Transcribes voice message to text using Groq Whisper."""
-    if PROVIDER != "Groq":
-        return ""
-    
+    """Uses Whisper to transcribe voice messages."""
     try:
         with open(file_path, "rb") as audio_file:
-            transcription = await client.audio.transcriptions.create(
-                file=audio_file,
+            transcript = await client.audio.transcriptions.create(
                 model="whisper-large-v3",
-                response_format="text"
+                file=audio_file
             )
-            return transcription
+            return transcript.text
     except Exception as e:
-        logger.error(f"Transcription Error: {e}")
+        logging.error(f"STT Error: {e}")
         return ""

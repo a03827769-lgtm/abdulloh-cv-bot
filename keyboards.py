@@ -6,36 +6,29 @@ from aiogram.types import (
 from content import MESSAGES
 from config import WEB_APP_URL
 
-
 def get_language_kb():
-    """Returns language selection inline keyboard."""
+    """Elegant language selection."""
     buttons = [
         [
-            InlineKeyboardButton(text="🇺🇿 O'zbekcha", callback_data="lang_uz"),
-            InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang_ru"),
-            InlineKeyboardButton(text="🇺🇸 English", callback_data="lang_en")
+            InlineKeyboardButton(text="💎 O'zbekcha", callback_data="lang_uz"),
+            InlineKeyboardButton(text="💎 Русский", callback_data="lang_ru"),
+            InlineKeyboardButton(text="💎 English", callback_data="lang_en")
         ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
-
 
 def get_portfolio_kb():
-    """Returns portfolio category inline buttons with minimalist icons."""
+    """Premium portfolio categories with minimalist aesthetics."""
     buttons = [
         [
-            InlineKeyboardButton(text="✦ Mobilography", callback_data="port_mob"),
-            InlineKeyboardButton(text="✦ Web & Bots", callback_data="port_code")
-        ],
-        [
-            InlineKeyboardButton(text="✦ AI Solutions", callback_data="port_ai"),
-            InlineKeyboardButton(text="✦ Automotive", callback_data="port_car")
+            InlineKeyboardButton(text="✦ Mobilography & Arts", callback_data="port_mob"),
+            InlineKeyboardButton(text="✦ AI & Systems", callback_data="port_code")
         ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
-
 def get_main_menu(lang: str):
-    """Returns the Master Level main menu with FAQ."""
+    """The Ultimate Master Menu with intuitive layout."""
     btns = MESSAGES[lang]["buttons"]
     rows = [
         [KeyboardButton(text=btns["about"]), KeyboardButton(text=btns["experience"])],
@@ -44,24 +37,24 @@ def get_main_menu(lang: str):
         [KeyboardButton(text=btns["contact"]), KeyboardButton(text=btns["faq"])],
         [KeyboardButton(text=btns["lang"]), KeyboardButton(text=btns["hire"])]
     ]
-    return ReplyKeyboardMarkup(keyboard=rows, resize_keyboard=True)
+    return ReplyKeyboardMarkup(keyboard=rows, resize_keyboard=True, input_field_placeholder="✦ Elite System Activated")
 
 def get_ai_keyboard(lang: str):
-    """Keyboard for AI Chatting mode."""
-    text = "⬅️ Ortga / Назад / Back"
+    """Back button for AI mode, specific to language."""
+    btn_text = MESSAGES[lang]["buttons"]["back"]
     return ReplyKeyboardMarkup(
-        keyboard=[[KeyboardButton(text=text)]],
+        keyboard=[[KeyboardButton(text=btn_text)]],
         resize_keyboard=True
     )
 
 def get_contact_inline():
-    """Returns minimalist inline buttons for social links."""
+    """High-end social connectivity buttons."""
     buttons = [
         [
-            InlineKeyboardButton(text="◈ Telegram", url="https://t.me/abdulloh_ai"),
-            InlineKeyboardButton(text="◈ Instagram", url="https://instagram.com/abdullokh_mk")
+            InlineKeyboardButton(text="◈ Digital Office (TG)", url="https://t.me/abdulloh_ai"),
+            InlineKeyboardButton(text="◈ Visual Gallery (IG)", url="https://instagram.com/abdullokh_mk")
         ],
-        [InlineKeyboardButton(text="✧ Portfolio Channel", url="https://t.me/upgcard")],
-        [InlineKeyboardButton(text="📄 Download CV (PDF)", callback_data="download_cv")]
+        [InlineKeyboardButton(text="✧ Official Portfolio Channel", url="https://t.me/upgcard")],
+        [InlineKeyboardButton(text="📄 Get Professional CV (PDF)", callback_data="download_cv")]
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
