@@ -40,6 +40,20 @@ async def init_db():
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
+        
+        # Migration: Add missing columns if they don't exist
+        columns_to_add = [
+            ('language', "TEXT DEFAULT 'uz'"),
+            ('last_active', "TIMESTAMP"),
+            ('joined_at', "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+        ]
+        
+        for col_name, col_type in columns_to_add:
+            try:
+                await db.execute(f'ALTER TABLE users ADD COLUMN {col_name} {col_type}')
+            except:
+                pass # Column already exists
+            
         await db.commit()
 
 async def add_user(user_id: int, username: str, full_name: str):

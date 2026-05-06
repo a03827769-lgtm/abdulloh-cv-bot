@@ -13,7 +13,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("data/bot.log"),
+        logging.FileHandler("data/bot.log", encoding='utf-8'),
         logging.StreamHandler(sys.stdout)
     ]
 )
@@ -35,7 +35,8 @@ async def main():
     # Register Routers
     dp.include_router(router)
 
-    logger.info("✦ MASTER CV BOT IS ONLINE ✦")
+    print("--- MASTER CV BOT IS ONLINE ---")
+    logger.info("MASTER CV BOT IS ONLINE")
     
     try:
         # Start Polling

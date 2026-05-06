@@ -85,7 +85,8 @@ async def btn_experience(message: Message):
     header = {"uz": "TAJRIBA", "ru": "ОПЫТ", "en": "EXPERIENCE"}
     text = f"✦ *{header[lang]}*\n{H}\n\n"
     for exp in CV_DATA["experience"]:
-        text += f"◈  *{esc(exp['title'])}* \\({esc(exp['duration'])}\\)\n└ {esc(exp['desc'][lang])}\n\n"
+        # Title and Duration are safe, description is already formatted
+        text += f"◈  *{esc(exp['title'])}* \\({esc(exp['duration'])}\\)\n└ {exp['desc'][lang]}\n\n"
     await message.answer(text, parse_mode="MarkdownV2")
 
 @router.message(F.text.in_(get_btns("skills")))
@@ -112,6 +113,20 @@ async def btn_faq(message: Message):
     await log_action(uid, "Viewed FAQ")
     lang = await get_user_language(uid)
     await message.answer(MESSAGES[lang]["faq"], parse_mode="MarkdownV2")
+
+@router.message(F.text.in_(get_btns("contact")))
+async def btn_contact(message: Message):
+    uid = message.from_user.id
+    await log_action(uid, "Viewed Contact")
+    lang = await get_user_language(uid)
+    await message.answer(MESSAGES[lang]["contact"], reply_markup=get_contact_inline(), parse_mode="MarkdownV2")
+
+@router.message(F.text.in_(get_btns("lang")))
+async def btn_lang(message: Message):
+    uid = message.from_user.id
+    await log_action(uid, "Opened Language Menu")
+    lang = await get_user_language(uid)
+    await message.answer(MESSAGES[lang]["lang_select"], reply_markup=get_language_kb())
 
 @router.message(F.text.in_(get_btns("mini_app")))
 async def btn_web_cv(message: Message):
@@ -182,11 +197,14 @@ async def cb_portfolio(callback: CallbackQuery):
     uid = callback.from_user.id
     await log_action(uid, f"Viewed Portfolio: {cat}")
     lang = await get_user_language(uid)
-    text_esc = esc(PORTFOLIO_DATA.get(cat, {}).get(lang, "N/A"))
+    text = PORTFOLIO_DATA.get(cat, {}).get(lang, "N/A")
+    
     try:
-        if cat == "mob": await callback.message.answer_video(video=MEDIA["mobilography"], caption=text_esc, parse_mode="MarkdownV2")
-        else: await callback.message.answer(text_esc, parse_mode="MarkdownV2")
-    except Exception: await callback.message.answer(text_esc, parse_mode="MarkdownV2")
+        if cat == "mob": await callback.message.answer_video(video=MEDIA["mobilography"], caption=text, parse_mode="MarkdownV2")
+        else: await callback.message.answer(text, parse_mode="MarkdownV2")
+    except Exception: 
+        # Final fallback: send without formatting if MarkdownV2 fails
+        await callback.message.answer(text.replace("\\", ""))
     await callback.answer()
 
 # ━━━━━━━━━━━━━━━━━━━━
@@ -220,15 +238,18 @@ async def hire_budget(message: Message, state: FSMContext):
 @router.message(HireMeStates.waiting_for_contact)
 async def hire_finish(message: Message, state: FSMContext):
     data = await state.get_data()
+    from ai_engine import score_lead
+    quality = score_lead(data['name'], data['project'], data['budget'])
+    
     summary = (
-        f"🤝 *MASTER PROJECT PROPOSAL*\n{H}\n"
-        f"👤 *From:* {esc(data['name'])}\n"
-        f"📝 *Project:* {esc(data['project'])}\n"
+        f"🤝 *STRATEGIC LEAD: {quality}*\n{H}\n"
+        f"👤 *Client:* {esc(data['name'])}\n"
+        f"📝 *Brief:* {esc(data['project'])}\n"
         f"💰 *Budget:* {esc(data['budget'])}\n"
-        f"📞 *Contact:* {esc(message.text)}"
+        f"📞 *Connect:* {esc(message.text)}"
     )
     if ADMIN_ID: await message.bot.send_message(ADMIN_ID, summary, parse_mode="MarkdownV2")
-    await message.answer("✅ *Ma'lumotlar yuborildi!* Rahmat, Abdulloh tez orada siz bilan bog'lanadi\\.", parse_mode="MarkdownV2")
+    await message.answer("✅ *So'rovingiz qabul qilindi\\.*\n\nAbdulloh loyiha detallarini tahlil qilib, tez orada siz bilan bog'lanadi\\. Rahmat\\!", parse_mode="MarkdownV2")
     await state.clear()
 
 @router.message(F.text)

@@ -6,81 +6,77 @@ from reportlab.lib.units import inch
 from content import CV_DATA
 import os
 
-def generate_cv_pdf(lang: str, output_path: str, user_name: str = "Foydalanuvchi"):
-    """Generates an Agency-Grade professional PDF CV."""
+def generate_cv_pdf(lang: str, output_path: str, user_name: str = "Client"):
+    """Generates an Executive Business Profile PDF."""
     doc = SimpleDocTemplate(
         output_path, 
         pagesize=A4,
-        rightMargin=45,
-        leftMargin=45,
-        topMargin=45,
-        bottomMargin=45
+        rightMargin=40,
+        leftMargin=40,
+        topMargin=40,
+        bottomMargin=40
     )
     styles = getSampleStyleSheet()
     
-    # --- DESIGN SYSTEM ---
-    c_primary = colors.HexColor("#0f172a") # Midnight
-    c_accent = colors.HexColor("#3b82f6")  # Electric Blue
-    c_text = colors.HexColor("#475569")    # Slate
+    # --- EXECUTIVE DESIGN SYSTEM ---
+    c_primary = colors.HexColor("#0f172a") # Dark Slate
+    c_accent = colors.HexColor("#6366f1")  # Indigo
+    c_text = colors.HexColor("#334155")    # Slate 700
+    c_dim = colors.HexColor("#64748b")     # Slate 500
     
-    # --- STYLES ---
-    st_name = ParagraphStyle('Name', fontSize=28, textColor=c_primary, fontName='Helvetica-Bold', spaceAfter=2)
-    st_title = ParagraphStyle('Title', fontSize=12, textColor=c_accent, fontName='Helvetica-Bold', spaceAfter=14, letterSpacing=1)
-    st_section = ParagraphStyle('Sec', fontSize=14, textColor=c_primary, fontName='Helvetica-Bold', spaceBefore=20, spaceAfter=10, borderPadding=(0,0,3,0), borderColor=c_accent, borderWidth=0, leading=20)
-    st_body = ParagraphStyle('Body', fontSize=10, leading=15, textColor=c_text, fontName='Helvetica')
-    st_case_title = ParagraphStyle('CaseT', fontSize=11, fontName='Helvetica-Bold', textColor=c_primary, spaceBefore=8)
-    st_case_body = ParagraphStyle('CaseB', fontSize=9, leading=13, textColor=c_text, leftIndent=12, spaceAfter=8)
+    # --- PROFESSIONAL STYLES ---
+    st_header = ParagraphStyle('Header', fontSize=32, textColor=c_primary, fontName='Helvetica-Bold', spaceAfter=2)
+    st_title = ParagraphStyle('Title', fontSize=14, textColor=c_accent, fontName='Helvetica-Bold', spaceAfter=14, letterSpacing=2)
+    st_section = ParagraphStyle('Section', fontSize=15, textColor=c_primary, fontName='Helvetica-Bold', spaceBefore=25, spaceAfter=12)
+    st_body = ParagraphStyle('Body', fontSize=11, leading=16, textColor=c_text, fontName='Helvetica')
+    st_philosophy = ParagraphStyle('Phil', parent=st_body, italic=True, textColor=c_accent, leftIndent=20, borderPadding=10)
+    st_review = ParagraphStyle('Review', fontSize=10, leading=14, textColor=c_dim, italic=True, spaceBefore=10)
+    st_client = ParagraphStyle('Client', fontSize=9, fontName='Helvetica-Bold', textColor=c_primary, leftIndent=10)
     
     elements = []
     
     # --- HEADER ---
-    elements.append(Paragraph(CV_DATA["name"].upper(), st_name))
-    elements.append(Paragraph("CREATIVE DIRECTOR | FULL-STACK DEVELOPER | AI SPECIALIST", st_title))
+    elements.append(Paragraph(CV_DATA["name"].upper(), st_header))
+    elements.append(Paragraph("CREATIVE TECHNOLOGIST & AI ARCHITECT", st_title))
     
-    contact_data = [
-        [f"📍 {CV_DATA['location']}", f"📱 {CV_DATA['contacts']['telegram']}", f"✉️ {CV_DATA['contacts']['instagram']}"]
-    ]
-    t_contact = Table(contact_data, colWidths=[2*inch, 2*inch, 2*inch])
-    t_contact.setStyle(TableStyle([
-        ('FONTSIZE', (0,0), (-1,-1), 9),
-        ('TEXTCOLOR', (0,0), (-1,-1), c_text),
-        ('ALIGN', (0,0), (-1,-1), 'LEFT'),
-    ]))
-    elements.append(t_contact)
-    elements.append(Spacer(1, 10))
-    elements.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#e2e8f0"), spaceBefore=10, spaceAfter=10))
+    # Quick Info
+    info = [[f"📍 Tashkent, Uzbekistan", f"📱 {CV_DATA['contacts']['telegram']}", f"🌐 @upgcard"]]
+    t_info = Table(info, colWidths=[2.2*inch, 2.2*inch, 2.2*inch])
+    t_info.setStyle(TableStyle([('FONTSIZE', (0,0), (-1,-1), 10), ('TEXTCOLOR', (0,0), (-1,-1), c_dim)]))
+    elements.append(t_info)
+    elements.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#e2e8f0"), spaceBefore=15, spaceAfter=20))
     
-    # --- ABOUT ---
-    elements.append(Paragraph("PROFESSIONAL PROFILE", st_section))
-    about_text = {
-        "uz": "Innovatsion texnologiyalar va vizual san'at uyg'unligida bizneslar uchun yuqori natijali yechimlar yaratuvchi mutaxassis. Nordic University talabasi va 5 yillik professional Taekwondo tajribasiga ega intizomli lider.",
-        "ru": "Специалист, создающий высокоэффективные решения на стыке инновационных технологий и визуального искусства. Студент Nordic University и дисциплинированный лидер с 5-летним опытом в Тхэквондо.",
-        "en": "Specialist creating high-performance solutions at the intersection of innovative technologies and visual arts. Nordic University student and a disciplined leader with 5 years of professional Taekwondo experience."
-    }
-    elements.append(Paragraph(about_text[lang], st_body))
+    # --- STRATEGIC PHILOSOPHY ---
+    elements.append(Paragraph("EXECUTIVE SUMMARY", st_section))
+    elements.append(Paragraph(CV_DATA["philosophy"][lang], st_philosophy))
+    elements.append(Spacer(1, 15))
     
-    # --- CASE STUDIES ---
-    elements.append(Paragraph("STRATEGIC PROJECTS & CASE STUDIES", st_section))
-    for proj in CV_DATA["projects"]:
-        elements.append(Paragraph(proj['name'], st_case_title))
-        elements.append(Paragraph(proj[lang], st_case_body))
-    
-    # --- SKILLS & EXPERIENCE (Two Column Layout) ---
-    elements.append(Paragraph("EXPERTISE & SKILLS", st_section))
-    skills_text = f"<b>Technical:</b> {', '.join(CV_DATA['skills']['technical'])}<br/><b>Soft Skills:</b> {', '.join(CV_DATA['skills']['soft'])}"
-    elements.append(Paragraph(skills_text, st_body))
-    
-    elements.append(Paragraph("PROFESSIONAL EXPERIENCE", st_section))
+    # --- EXPERTISE ---
+    elements.append(Paragraph("CORE EXPERTISE", st_section))
     for exp in CV_DATA["experience"]:
-        elements.append(Paragraph(f"<b>{exp['title']}</b> — {exp['duration']}", st_body))
-        elements.append(Paragraph(exp['desc'][lang], st_case_body))
+        elements.append(Paragraph(f"<b>{exp['title']}</b>", st_body))
+        elements.append(Paragraph(exp['desc'][lang], ParagraphStyle('Desc', parent=st_body, fontSize=10, spaceAfter=8, textColor=c_text)))
+    
+    # --- TESTIMONIALS (The Next Level Part) ---
+    elements.append(Paragraph("CLIENT TESTIMONIALS", st_section))
+    for rev in CV_DATA["reviews"]:
+        elements.append(Paragraph(f"\"{rev['text'][lang]}\"", st_review))
+        elements.append(Paragraph(f"— {rev['client']}", st_client))
+        elements.append(Spacer(1, 5))
+        
+    # --- STRATEGIC VALUES ---
+    elements.append(Paragraph("STRATEGIC VALUES", st_section))
+    values = f"◈ <b>Precision:</b> AI-driven efficiency for 0% error margin.<br/>" \
+             f"◈ <b>Emotion:</b> Cinematic storytelling for 40%+ conversion rates.<br/>" \
+             f"◈ <b>Discipline:</b> Fast execution with Taekwondo-forged focus."
+    elements.append(Paragraph(values, st_body))
 
     # --- CALL TO ACTION ---
-    elements.append(Spacer(1, 40))
-    elements.append(HRFlowable(width="30%", thickness=2, color=c_accent, align='CENTER'))
-    elements.append(Spacer(1, 10))
-    cta_text = f"<i>This CV was generated exclusively for {user_name} by Abdulloh's AI Bot.</i><br/><b>Scan to see full Interactive Portfolio: t.me/AbdullohCvbot</b>"
-    elements.append(Paragraph(cta_text, ParagraphStyle('CTA', parent=st_body, alignment=1, textColor=c_accent)))
+    elements.append(Spacer(1, 50))
+    elements.append(HRFlowable(width="40%", thickness=2, color=c_accent, align='LEFT'))
+    cta_text = f"<i>Prepared exclusively for potential strategic partners.</i><br/>" \
+               f"<b>Scan or visit to discuss your project: t.me/AbdullohCvbot</b>"
+    elements.append(Paragraph(cta_text, ParagraphStyle('CTA', parent=st_body, textColor=c_accent, spaceBefore=10)))
     
     try:
         doc.build(elements)
