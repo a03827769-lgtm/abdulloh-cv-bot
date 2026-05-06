@@ -1,0 +1,22 @@
+# Environment variables
+.env
+
+# Python virtual environment
+.venv
+venv
+env/
+__pycache__/
+*.pyc
+
+# Database
+data/*.db
+
+# Temporary files
+data/*.ogg
+data/*.mp4
+data/*.pdf
+*.log
+
+# IDE files
+.vscode/
+.idea/
