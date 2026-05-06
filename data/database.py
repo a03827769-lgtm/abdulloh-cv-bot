@@ -69,3 +69,23 @@ async def get_all_users():
         async with db.execute('SELECT user_id FROM users') as cursor:
             rows = await cursor.fetchall()
             return [row[0] for row in rows]
+
+async def get_detailed_stats():
+    """Returns comprehensive analytics for the admin."""
+    async with aiosqlite.connect(DATABASE_PATH) as db:
+        # Total messages
+        async with db.execute('SELECT COUNT(*) FROM messages') as c:
+            msg_count = (await c.fetchone())[0]
+        # AI specific questions (those starting with AI tag or from AI mode)
+        async with db.execute('SELECT COUNT(*) FROM messages WHERE text NOT LIKE "/%"') as c:
+            ai_count = (await c.fetchone())[0]
+        return {
+            "messages": msg_count,
+            "ai_queries": ai_count
+        }
+
+async def get_recent_users(limit=10):
+    """Returns the list of most recent users."""
+    async with aiosqlite.connect(DATABASE_PATH) as db:
+        async with db.execute('SELECT user_id, full_name, username FROM users ORDER BY joined_at DESC LIMIT ?', (limit,)) as cursor:
+            return await cursor.fetchall()

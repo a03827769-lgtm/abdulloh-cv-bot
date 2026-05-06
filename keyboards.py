@@ -20,44 +20,48 @@ def get_language_kb():
 
 
 def get_portfolio_kb():
-    """Returns portfolio category inline buttons."""
+    """Returns portfolio category inline buttons with minimalist icons."""
     buttons = [
         [
-            InlineKeyboardButton(text="📸 Mobilografiya", callback_data="port_mob"),
-            InlineKeyboardButton(text="💻 Web & Bots", callback_data="port_code")
+            InlineKeyboardButton(text="✦ Mobilography", callback_data="port_mob"),
+            InlineKeyboardButton(text="✦ Web & Bots", callback_data="port_code")
         ],
         [
-            InlineKeyboardButton(text="🤖 AI & SMM", callback_data="port_ai"),
-            InlineKeyboardButton(text="🚗 Car Detailing", callback_data="port_car")
+            InlineKeyboardButton(text="✦ AI Solutions", callback_data="port_ai"),
+            InlineKeyboardButton(text="✦ Automotive", callback_data="port_car")
         ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
 
 def get_main_menu(lang: str):
-    """Returns the main reply keyboard menu based on language."""
+    """Returns the Master Level main menu with FAQ."""
     btns = MESSAGES[lang]["buttons"]
-    # Build rows of regular text buttons
     rows = [
         [KeyboardButton(text=btns["about"]), KeyboardButton(text=btns["experience"])],
-        [KeyboardButton(text=btns["skills"]), KeyboardButton(text=btns["education"])],
-        [KeyboardButton(text=btns["portfolio"]), KeyboardButton(text=btns["contact"])],
-        [KeyboardButton(text=btns["hire"]), KeyboardButton(text=btns["lang"])],
+        [KeyboardButton(text=btns["portfolio"]), KeyboardButton(text=btns["skills"])],
+        [KeyboardButton(text=btns["ai_chat"]), KeyboardButton(text=btns["mini_app"])],
+        [KeyboardButton(text=btns["contact"]), KeyboardButton(text=btns["faq"])],
+        [KeyboardButton(text=btns["lang"]), KeyboardButton(text=btns["hire"])]
     ]
-    # If a Web App URL is configured, add a dedicated button that opens the Mini App
-    if WEB_APP_URL:
-        rows.append([KeyboardButton(text=btns.get("mini_app", "Web CV"), web_app=WebAppInfo(url=WEB_APP_URL))])
     return ReplyKeyboardMarkup(keyboard=rows, resize_keyboard=True)
 
+def get_ai_keyboard(lang: str):
+    """Keyboard for AI Chatting mode."""
+    text = "⬅️ Ortga / Назад / Back"
+    return ReplyKeyboardMarkup(
+        keyboard=[[KeyboardButton(text=text)]],
+        resize_keyboard=True
+    )
 
 def get_contact_inline():
-    """Returns inline buttons for social links and PDF download."""
+    """Returns minimalist inline buttons for social links."""
     buttons = [
         [
-            InlineKeyboardButton(text="💬 Telegram", url="https://t.me/abdulloh_ai"),
-            InlineKeyboardButton(text="📷 Instagram", url="https://instagram.com/abdullokh_mk")
+            InlineKeyboardButton(text="◈ Telegram", url="https://t.me/abdulloh_ai"),
+            InlineKeyboardButton(text="◈ Instagram", url="https://instagram.com/abdullokh_mk")
         ],
-        [InlineKeyboardButton(text="📢 Portfolio Channel", url="https://t.me/upgcard")],
-        [InlineKeyboardButton(text="📄 CV yuklab olish (PDF)", callback_data="download_cv")]
+        [InlineKeyboardButton(text="✧ Portfolio Channel", url="https://t.me/upgcard")],
+        [InlineKeyboardButton(text="📄 Download CV (PDF)", callback_data="download_cv")]
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)

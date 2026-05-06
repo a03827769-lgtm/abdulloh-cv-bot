@@ -1,8 +1,4 @@
-"""CV content data and multi-language messages with premium formatting."""
-
-# ━━━━━━━━━━━━━━━━━━━━
-# CV DATA
-# ━━━━━━━━━━━━━━━━━━━━
+"""CV content data with Professional Case Studies and FAQ."""
 
 CV_DATA = {
     "name": "Muhammadjonov Abdulloh",
@@ -15,332 +11,254 @@ CV_DATA = {
     },
     "education": {
         "university": "Nordic University",
-        "major": "Iqtisod (Economics)",
-        "year": "1-kurs",
+        "major": "Economics & Mathematics",
+        "year": "1st Year",
     },
     "projects": [
         {
             "name": "UPG Card",
-            "type": "Portfolio / SMM",
-            "link": "@upgcard",
-            "desc": "Shaxsiy brend va mobilografiya ishlari uchun yaratilgan platforma."
+            "type": "Production",
+            "uz": "◈ *Muammo:* Mijozlar uchun portfoliosini ko'rsatish murakkab edi.\n◈ *Yechim:* Premium vizitka va bot tizimi yaratildi.\n◈ *Natija:* 50+ mijozlar oqimi.",
+            "ru": "◈ *Проблема:* Сложность в демонстрации портфолио.\n◈ *Решение:* Создана система премиум-визиток и ботов.\n◈ *Результат:* Поток из 50+ клиентов.",
+            "en": "◈ *Problem:* Difficulty in showcasing portfolios.\n◈ *Solution:* Premium business card and bot system created.\n◈ *Result:* Inflow of 50+ clients."
         },
         {
-            "name": "Smart Balance Mini App",
-            "type": "Development",
-            "desc": "Tadbirkorlar uchun moliya boshqaruv tizimi (Telegram Mini App)."
-        },
-        {
-            "name": "Arenda Bot",
-            "type": "Bot Development",
-            "desc": "Ijara xizmatlari uchun avtomatlashtirilgan tizim."
+            "name": "Smart Balance",
+            "type": "AI System",
+            "uz": "◈ *Muammo:* Moliya boshqaruvida inson omili xatolari.\n◈ *Yechim:* AI integratsiyali Mini App tizimi.\n◈ *Natija:* 99% hisob-kitob aniqligi.",
+            "ru": "◈ *Проблема:* Человеческий фактор в финансах.\n◈ *Решение:* Mini App с AI интеграцией.\n◈ *Результат:* 99% точность расчетов.",
+            "en": "◈ *Problem:* Human error in finance management.\n◈ *Solution:* AI-integrated Mini App system.\n◈ *Result:* 99% calculation accuracy."
         }
     ],
     "experience": [
-        {
-            "title": "Mobilograf & Content Creator",
-            "duration": "1.5 yil",
-            "desc": {
-                "uz": "Sifatli video kontentlar, 4K montaj, rangli korreksiya va kreativ ssenariylar ustida ishlash.",
-                "ru": "Создание качественного видеоконтента, монтаж в 4K, цветокоррекция и работа над креативными сценариями.",
-                "en": "Creating high-quality video content, 4K editing, color correction, and working on creative scripts."
-            }
-        },
-        {
-            "title": "Full-Stack Bot Developer",
-            "duration": "1 yil",
-            "desc": {
-                "uz": "Aiogram, FastAPI va AI integratsiyalari bilan murakhhab botlar va Mini App'lar yaratish.",
-                "ru": "Создание сложных ботов и Mini Apps с использованием Aiogram, FastAPI и AI интеграций.",
-                "en": "Building complex bots and Mini Apps using Aiogram, FastAPI, and AI integrations."
-            }
-        },
-        {
-            "title": "SMM Specialist",
-            "duration": "5 oy",
-            "desc": {
-                "uz": "Brendni rivojlantirish, auditoriya bilan ishlash va Reels/Posts strategiyasini tuzish.",
-                "ru": "Развитие бренда, работа с аудиторией и создание стратегии Reels/Posts.",
-                "en": "Brand development, audience engagement, and creating Reels/Posts strategies."
-            }
-        },
-        {
-            "title": "Car Detailing Specialist",
-            "duration": "1 yil",
-            "desc": {
-                "uz": "Tanirovka, broniplyonka va laminatsiya xizmatlari bo'yicha professional tajriba.",
-                "ru": "Профессиональный опыт в услугах тонировки, бронепленке и ламинации.",
-                "en": "Professional experience in car tinting, protective film, and lamination services."
-            }
-        }
+        {"title": "Mobilographer & Director", "duration": "1.5 Years"},
+        {"title": "Full-Stack Developer", "duration": "1 Year"},
+        {"title": "SMM Strategist", "duration": "5 Months"},
+        {"title": "Car Detailing Expert", "duration": "1 Year"}
     ],
     "skills": {
-        "technical": ["Mobilografiya", "Python (Aiogram/FastAPI)", "Web Development (React/Vite)", "AI Engineering", "SMM"],
-        "soft": {
-            "uz": ["Jamoada ishlash", "Liderlik", "Matematik tahlil", "Kreativ fikrlash"],
-            "ru": ["Командная работа", "Лидерство", "Математический анализ", "Креативное мышление"],
-            "en": ["Teamwork", "Leadership", "Mathematical Analysis", "Creative Thinking"]
-        },
-        "extra": {
-            "uz": ["Taekwondo (5 yil, Medal va Sertifikatlar)", "IELTS 5.5"],
-            "ru": ["Тхэквондо (5 лет, медали и сертификаты)", "IELTS 5.5"],
-            "en": ["Taekwondo (5 years, Medals & Certificates)", "IELTS 5.5"]
-        }
-    },
-    "languages_spoken": [
-        {"lang": "O'zbek", "level": "Ona tili (Native)"},
-        {"lang": "English", "level": "IELTS 5.5"},
-        {"lang": "Русский", "level": "Свободное общение"}
-    ]
+        "technical": ["Mobilography", "Python (AI/FastAPI)", "React", "SMM"],
+        "soft": ["Leadership", "Analytical Thinking", "Creativity"]
+    }
+}
+
+FAQ_DATA = {
+    "uz": (
+        f"✦ *KO'P BERILADIGAN SAVOLLAR*\n"
+        f"──────────────────────────\n\n"
+        f"◈ *Qaysi dasturlarda ishlaysiz?*\n"
+        f"└ Adobe Premiere, CapCut, Python (Aiogram/FastAPI), React\\.\n\n"
+        f"◈ *Hamkorlik shartlari qanday?*\n"
+        f"└ Har bir loyiha individual yondashuv va shartnoma asosida kelishiladi\\.\n\n"
+        f"◈ *Ish vaqtingiz?*\n"
+        f"└ Moslashuvchan grafik, asosan 10:00 — 20:00\\.\n\n"
+        f"◈ *Siz bilan qanday bog'lanish mumkin?*\n"
+        f"└ Botdagi 'Aloqa' bo'limi yoki to'g'ridan-to'g'ri @abdulloh\\_ai orqali\\."
+    ),
+    "ru": (
+        f"✦ *ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ*\n"
+        f"──────────────────────────\n\n"
+        f"◈ *В каких программах работаете?*\n"
+        f"└ Adobe Premiere, CapCut, Python, React\\.\n\n"
+        f"◈ *Условия сотрудничества?*\n"
+        f"└ Каждый проект обсуждается индивидуально на основе договора\\.\n\n"
+        f"◈ *График работы?*\n"
+        f"└ Гибкий график, в основном 10:00 — 20:00\\.\n\n"
+        f"◈ *Как с вами связаться?*\n"
+        f"└ Через раздел 'Контакты' или напрямую @abdulloh\\_ai\\."
+    ),
+    "en": (
+        f"✦ *FREQUENTLY ASKED QUESTIONS*\n"
+        f"──────────────────────────\n\n"
+        f"◈ *What software do you use?*\n"
+        f"└ Adobe Premiere, CapCut, Python, React\\.\n\n"
+        f"◈ *What are the cooperation terms?*\n"
+        f"└ Each project is negotiated individually based on a contract\\.\n\n"
+        f"◈ *Working hours?*\n"
+        f"└ Flexible schedule, mainly 10:00 AM — 8:00 PM\\.\n\n"
+        f"◈ *How to contact you?*\n"
+        f"└ Through the 'Contact' section or directly via @abdulloh\\_ai\\."
+    )
 }
 
 # ━━━━━━━━━━━━━━━━━━━━
-# MEDIA (Telegram File IDs or Direct URLs)
+# MEDIA & FORMATTING (Kept for compatibility)
 # ━━━━━━━━━━━━━━━━━━━━
 
 MEDIA = {
-    "start": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97", # Welcome Image
-    "about": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", # Profile Photo
-    "mobilography": "https://v1.pinimg.com/videos/mc/720p/f1/8c/6b/f18c6b7d3453716d1f568a86576b5d9d.mp4", # Sample Video
+    "start": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
+    "about": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    "mobilography": "https://v1.pinimg.com/videos/mc/720p/f1/8c/6b/f18c6b7d3453716d1f568a86576b5d9d.mp4",
 }
 
-# ━━━━━━━━━━━━━━━━━━━━
-# PREMIUM FORMATTING
-# ━━━━━━━━━━━━━━━━━━━━
-
-H = "━━━━━━━━━━━━━━━━━━━━━━━━━━"
-DOT = "◉"
-
-# ━━━━━━━━━━━━━━━━━━━━
-# MESSAGES (3 LANGUAGES)
-# ━━━━━━━━━━━━━━━━━━━━
+H = "──────────────────────────"
 
 MESSAGES = {
     "uz": {
         "start": (
-            f"{H}\n"
-            f"👤  *MUHAMMADJONOV ABDULLOH*\n"
+            f"✦ *MUHAMMADJONOV ABDULLOH*\n"
             f"{H}\n\n"
-            f"Mobilograf  ·  Developer  ·  AI Expert\n\n"
-            f"Assalomu alaykum\\! Men Abdullohning shaxsiy AI\\-assistentiman\\.\n"
-            f"Pastdagi menyudan kerakli bo'limni tanlang yoki bemalol savol bering\\!\n\n"
-            f"🤖 _Men siz bilan Abdulloh haqida gaplasha olaman\\._"
+            f"Creative Director  ·  Developer  ·  AI Engineer\n\n"
+            f"Assalomu alaykum\\. Abdullohning raqamli ekotizimiga xush kelibsiz\\.\n"
+            f"Sizga qanday yordam bera olaman?"
         ),
-        "menu": "Pastdagi menyudan foydalaning 👇",
+        "menu": "Pastdagi menyudan foydalaning ⬦",
         "about": (
-            f"{H}\n"
-            f"👤  *MEN HAQIMDA*\n"
+            f"✦ *PERSONAL PROFILE*\n"
             f"{H}\n\n"
-            f"Abdulloh — zamonaviy texnologiyalar va vizual san'at\n"
-            f"uyg'unligida ishlovchi 18 yoshli mutaxassis\\.\n\n"
-            f"🏛  *Ta'lim:* Nordic University \\(Iqtisod, 1\\-kurs\\)\n"
-            f"📍  *Manzil:* Toshkent shahri\n"
-            f"🥋  *Sport:* Taekwondo — 5 yil \\(Medallar sohibi\\)\n"
-            f"🌍  *Tillar:* O'zbek \\| English \\(IELTS 5\\.5\\) \\| Русский\n\n"
-            f"_U nafaqat kod yozadi, balki kadrlarni jonlantiradi\\!_"
-        ),
-        "experience": (
-            f"{H}\n"
-            f"💼  *PROFESSIONAL TAJRIBA*\n"
-            f"{H}\n\n"
-        ),
-        "skills": (
-            f"{H}\n"
-            f"🛠  *MAHORAT VA KO'NIKMALAR*\n"
-            f"{H}\n\n"
-        ),
-        "education": (
-            f"{H}\n"
-            f"🎓  *TA'LIM*\n"
-            f"{H}\n\n"
-            f"🏛  *Muassasa:* Nordic University\n"
-            f"📖  *Yo'nalish:* Iqtisodiyot\n"
-            f"⏳  *Bosqich:* 1\\-kurs talabasi\n\n"
-            f"📐 *Qo'shimcha:* Matematika kursida 1\\.5 yil davomida\n"
-            f"chuqurlashtirilgan bilim olgan\\."
+            f"Abdulloh — texnologiya va vizual san'at chegarasida ishlovchi mutaxassis\\.\n\n"
+            f"◈ *Ta'lim:* Nordic University\n"
+            f"◈ *Manzil:* Toshkent, O'zbekiston\n"
+            f"◈ *Yutuq:* Taekwondo — 5 yillik intizom va medallar\n\n"
+            f"_Sifat — bu bizning asosiy tamoyilimiz\\._"
         ),
         "portfolio": (
-            f"{H}\n"
-            f"📁  *VISUAL PORTFOLIO*\n"
+            f"✦ *VISUAL PORTFOLIO*\n"
             f"{H}\n\n"
-            f"Abdullohning barcha ijodiy ishlarini quyidagi\n"
-            f"kategoriyalar orqali ko'rishingiz mumkin\\."
+            f"Loyihalarni kategoriyalar bo'yicha tanlang:"
         ),
         "contact": (
-            f"{H}\n"
-            f"📞  *ALOQA MA'LUMOTLARI*\n"
+            f"✦ *CONNECT*\n"
             f"{H}\n\n"
-            f"Siz Abdulloh bilan to'g'ridan\\-to'g'ri\n"
-            f"bog'lanishingiz mumkin:"
+            f"Hamkorlik yoki savollar uchun aloqaga chiqing:"
+        ),
+        "ai_intro": (
+            f"🤖 *AI YORDAMCHI REJIMIDA*\n"
+            f"{H}\n\n"
+            f"Men Abdullohning barcha loyihalari va tajribasi haqida ma'lumotga egaman\\.\n"
+            f"Menga xohlagan savolingizni berishingiz mumkin\\.\n\n"
+            f"_Chiqish uchun 'Ortga' tugmasini bosing\\._"
         ),
         "buttons": {
-            "about": "👤 Haqimda",
+            "about": "👤 Profil",
             "experience": "💼 Tajriba",
-            "skills": "🛠 Ko'nikmalar",
-            "education": "🎓 Ta'lim",
+            "skills": "🛠 Mahorat",
             "portfolio": "📁 Portfolio",
             "contact": "📞 Aloqa",
-            "lang": "🌐 Til / Language",
-            "hire": "💼 Hamkorlik",
-            "mini_app": "🚀 Web CV"
+            "lang": "🌐 Til",
+            "hire": "🤝 Hamkorlik",
+            "mini_app": "🚀 Web CV",
+            "ai_chat": "🤖 AI Yordamchi",
+            "faq": "❓ FAQ"
         }
     },
     "ru": {
         "start": (
-            f"{H}\n"
-            f"👤  *МУХАММАДЖОНОВ АБДУЛЛОХ*\n"
+            f"✦ *МУХАММАДЖОНОВ АБДУЛЛОХ*\n"
             f"{H}\n\n"
-            f"Мобилограф  ·  Разработчик  ·  AI Эксперт\n\n"
-            f"Здравствуйте\\! Я личный AI\\-ассистент Абдуллоха\\.\n"
-            f"Выберите раздел из меню или задайте любой вопрос\\!\n\n"
-            f"🤖 _Я могу рассказать вам всё об Абдуллохе\\._"
+            f"Креативный директор  ·  Разработчик  ·  AI Инженер\n\n"
+            f"Добро пожаловать в цифровую экосистему Абдуллоха\\.\n"
+            f"Чем я могу вам помочь?"
         ),
-        "menu": "Используйте меню ниже 👇",
+        "menu": "Используйте меню ниже ⬦",
         "about": (
-            f"{H}\n"
-            f"👤  *ОБО МНЕ*\n"
+            f"✦ *ПЕРСОНАЛЬНЫЙ ПРОФИЛЬ*\n"
             f"{H}\n\n"
-            f"Абдуллох — 18\\-летний специалист на стыке\n"
-            f"современных технологий и визуального искусства\\.\n\n"
-            f"🏛  *Учеба:* Nordic University \\(Экономика, 1\\-й курс\\)\n"
-            f"📍  *Локация:* Ташкент\n"
-            f"🥋  *Спорт:* Тхэквондо — 5 лет \\(обладатель медалей\\)\n"
-            f"🌍  *Языки:* Узбекский \\| English \\(IELTS 5\\.5\\) \\| Русский\n\n"
-            f"_Он не просто пишет код — он оживляет кадры\\!_"
-        ),
-        "experience": (
-            f"{H}\n"
-            f"💼  *ПРОФЕССИОНАЛЬНЫЙ ОПЫТ*\n"
-            f"{H}\n\n"
-        ),
-        "skills": (
-            f"{H}\n"
-            f"🛠  *НАВЫКИ И УМЕНИЯ*\n"
-            f"{H}\n\n"
-        ),
-        "education": (
-            f"{H}\n"
-            f"🎓  *ОБРАЗОВАНИЕ*\n"
-            f"{H}\n\n"
-            f"🏛  *Учреждение:* Nordic University\n"
-            f"📖  *Направление:* Экономика\n"
-            f"⏳  *Курс:* 1\\-й курс\n\n"
-            f"📐 *Дополнительно:* 1\\.5 года углубленного\n"
-            f"изучения математики\\."
+            f"Абдуллох — специалист, работающий на стыке технологий и искусства\\.\n\n"
+            f"◈ *Учеба:* Nordic University\n"
+            f"◈ *Локация:* Ташкент, Узбекистан\n"
+            f"◈ *Спорт:* Тхэквондо — 5 лет дисциплины и медалей\n\n"
+            f"_Качество — наш главный принцип\\._"
         ),
         "portfolio": (
-            f"{H}\n"
-            f"📁  *ВИЗУАЛЬНОЕ ПОРТФОЛИО*\n"
+            f"✦ *ПОРТФОЛИО*\n"
             f"{H}\n\n"
-            f"Просмотрите творческие работы Абдуллоха\n"
-            f"по категориям\\."
+            f"Выберите категорию проектов:"
         ),
         "contact": (
-            f"{H}\n"
-            f"📞  *КОНТАКТНАЯ ИНФОРМАЦИЯ*\n"
+            f"✦ *СВЯЗЬ*\n"
             f"{H}\n\n"
-            f"Вы можете связаться с Абдуллохом напрямую:"
+            f"Свяжитесь для сотрудничества или вопросов:"
+        ),
+        "ai_intro": (
+            f"🤖 *РЕЖИМ AI ПОМОЩНИКА*\n"
+            f"{H}\n\n"
+            f"Я знаю всё о проектах и опыте Абдуллоха\\.\n"
+            f"Вы можете задать мне любой вопрос\\.\n\n"
+            f"_Для выхода нажмите 'Назад'\\._"
         ),
         "buttons": {
-            "about": "👤 Обо мне",
+            "about": "👤 Профиль",
             "experience": "💼 Опыт",
             "skills": "🛠 Навыки",
-            "education": "🎓 Образование",
             "portfolio": "📁 Портфолио",
             "contact": "📞 Контакты",
-            "lang": "🌐 Язык / Til",
-            "hire": "💼 Сотрудничество",
-            "mini_app": "🚀 Web CV"
+            "lang": "🌐 Язык",
+            "hire": "🤝 Сотрудничество",
+            "mini_app": "🚀 Web CV",
+            "ai_chat": "🤖 AI Помощник",
+            "faq": "❓ FAQ"
         }
     },
     "en": {
         "start": (
-            f"{H}\n"
-            f"👤  *ABDULLOH MUHAMMADJONOV*\n"
+            f"✦ *ABDULLOH MUHAMMADJONOV*\n"
             f"{H}\n\n"
-            f"Mobilographer  ·  Developer  ·  AI Expert\n\n"
-            f"Hello\\! I am Abdulloh's personal AI assistant\\.\n"
-            f"Choose a section from the menu or ask me anything\\!\n\n"
-            f"🤖 _I can tell you everything about Abdulloh\\._"
+            f"Creative Director  ·  Developer  ·  AI Engineer\n\n"
+            f"Welcome to Abdulloh's digital ecosystem\\.\n"
+            f"How may I assist you today?"
         ),
-        "menu": "Use the menu below 👇",
+        "menu": "Use the menu below ⬦",
         "about": (
-            f"{H}\n"
-            f"👤  *ABOUT ME*\n"
+            f"✦ *PERSONAL PROFILE*\n"
             f"{H}\n\n"
-            f"Abdulloh is an 18\\-year\\-old specialist at the\n"
-            f"intersection of modern tech and visual arts\\.\n\n"
-            f"🏛  *Education:* Nordic University \\(Economics, 1st year\\)\n"
-            f"📍  *Location:* Tashkent, Uzbekistan\n"
-            f"🥋  *Sports:* Taekwondo — 5 years \\(Medal winner\\)\n"
-            f"🌍  *Languages:* Uzbek \\| English \\(IELTS 5\\.5\\) \\| Russian\n\n"
-            f"_He doesn't just write code — he brings frames to life\\!_"
-        ),
-        "experience": (
-            f"{H}\n"
-            f"💼  *PROFESSIONAL EXPERIENCE*\n"
-            f"{H}\n\n"
-        ),
-        "skills": (
-            f"{H}\n"
-            f"🛠  *MASTERY \\& SKILLS*\n"
-            f"{H}\n\n"
-        ),
-        "education": (
-            f"{H}\n"
-            f"🎓  *EDUCATION*\n"
-            f"{H}\n\n"
-            f"🏛  *Institution:* Nordic University\n"
-            f"📖  *Major:* Economics\n"
-            f"⏳  *Year:* 1st\\-year student\n\n"
-            f"📐 *Extra:* 1\\.5 years of advanced mathematics studies\\."
+            f"Abdulloh is a specialist working at the edge of tech and visual arts\\.\n\n"
+            f"◈ *Education:* Nordic University\n"
+            f"◈ *Location:* Tashkent, Uzbekistan\n"
+            f"◈ *Achievements:* 5 years of Taekwondo discipline\n\n"
+            f"_Quality is our primary principle\\._"
         ),
         "portfolio": (
-            f"{H}\n"
-            f"📁  *VISUAL PORTFOLIO*\n"
+            f"✦ *PORTFOLIO*\n"
             f"{H}\n\n"
-            f"View Abdulloh's creative works by category\\."
+            f"Select a project category:"
         ),
         "contact": (
-            f"{H}\n"
-            f"📞  *CONTACT INFORMATION*\n"
+            f"✦ *CONNECT*\n"
             f"{H}\n\n"
-            f"Get in touch with Abdulloh directly:"
+            f"Get in touch for collaboration or inquiries:"
+        ),
+        "ai_intro": (
+            f"🤖 *AI ASSISTANT MODE*\n"
+            f"{H}\n\n"
+            f"I have full knowledge of Abdulloh's projects and experience\\.\n"
+            f"Feel free to ask me anything\\.\n\n"
+            f"_Click 'Back' to exit AI mode\\._"
         ),
         "buttons": {
-            "about": "👤 About Me",
+            "about": "👤 Profile",
             "experience": "💼 Experience",
             "skills": "🛠 Skills",
-            "education": "🎓 Education",
             "portfolio": "📁 Portfolio",
             "contact": "📞 Contact",
-            "lang": "🌐 Language / Til",
-            "hire": "💼 Hire Me",
-            "mini_app": "🚀 Web CV"
+            "lang": "🌐 Language",
+            "hire": "🤝 Hire Me",
+            "mini_app": "🚀 Web CV",
+            "ai_chat": "🤖 AI Assistant",
+            "faq": "❓ FAQ"
         }
     }
 }
 
-# Portfolio category details (used by handlers)
 PORTFOLIO_DATA = {
     "mob": {
-        "uz": "📸  *Mobilografiya*\n\nProfessional video kontentlar, reklamalar va kreativ loyihalar\\.\nTajriba: 1\\.5 yil\\.\n\n👉 To'liq ishlar: @upgcard",
-        "ru": "📸  *Мобилография*\n\nПрофессиональный видеоконтент, рекламы и креативные проекты\\.\nОпыт: 1\\.5 года\\.\n\n👉 Все работы: @upgcard",
-        "en": "📸  *Mobilography*\n\nProfessional video content, ads, and creative projects\\.\nExperience: 1\\.5 years\\.\n\n👉 Full works: @upgcard"
+        "uz": "📸 *Mobilografiya*\n\n◈ *Project:* Cinematic Ad\n◈ *Muammo:* Mahsulotni dinamik ko'rsatish kerak edi.\n◈ *Natija:* Sifatli kadrlar va brend taniluvchanligi oshishi.",
+        "ru": "📸 *Мобилография*\n\n◈ *Проект:* Cinematic Ad\n◈ *Проблема:* Нужна динамика продукта.\n◈ *Результат:* Рост узнаваемости бренда.",
+        "en": "📸 *Mobilography*\n\n◈ *Project:* Cinematic Ad\n◈ *Problem:* Product needed dynamic visuals.\n◈ *Result:* High quality frames and brand awareness."
     },
     "code": {
-        "uz": f"💻  *Web \\& Telegram Bots*\n\n{DOT} CV Bot \\(aynan shu bot\\)\n{DOT} Smart Balance Mini App\n{DOT} Arenda Bot\n\n👉 Telegram: @abdulloh\\_ai",
-        "ru": f"💻  *Web \\& Telegram Боты*\n\n{DOT} CV Bot \\(этот самый бот\\)\n{DOT} Smart Balance Mini App\n{DOT} Arenda Bot\n\n👉 Telegram: @abdulloh\\_ai",
-        "en": f"💻  *Web \\& Telegram Bots*\n\n{DOT} CV Bot \\(this very bot\\)\n{DOT} Smart Balance Mini App\n{DOT} Arenda Bot\n\n👉 Telegram: @abdulloh\\_ai"
+        "uz": "💻 *Development*\n\n◈ CV Bot (Master Level)\n◈ Smart Balance App (AI)\n◈ Arenda Bot Infrastructure",
+        "ru": "💻 *Разработка*\n\n◈ CV Bot (Master Level)\n◈ Smart Balance App (AI)\n◈ Arenda Bot Infrastructure",
+        "en": "💻 *Development*\n\n◈ CV Bot (Master Level)\n◈ Smart Balance App (AI)\n◈ Arenda Bot Infrastructure"
     },
     "ai": {
-        "uz": "🤖  *AI \\& SMM*\n\nAI yordamida kontent yaratish, post dizayn,\nvideo ishlab chiqish\\.\nSMM tajribasi: 5 oy\\.\n\n👉 Instagram: abdullokh\\_mk",
-        "ru": "🤖  *AI \\& SMM*\n\nСоздание контента с помощью AI, дизайн постов,\nвидеопроизводство\\.\nОпыт SMM: 5 месяцев\\.\n\n👉 Instagram: abdullokh\\_mk",
-        "en": "🤖  *AI \\& SMM*\n\nAI\\-powered content creation, post design,\nvideo production\\.\nSMM experience: 5 months\\.\n\n👉 Instagram: abdullokh\\_mk"
+        "uz": "🤖 *AI Solutions*\n\n◈ AI Content Creation\n◈ Post Design & Strategy",
+        "ru": "🤖 *AI Решения*\n\n◈ AI Создание контента\n◈ Пост-дизайн и стратегия",
+        "en": "🤖 *AI Solutions*\n\n◈ AI Content Creation\n◈ Post Design & Strategy"
     },
     "car": {
-        "uz": "🚗  *Car Detailing*\n\nTanirovka, broniplyonka va laminatsiya\nbo'yicha professional tajriba\\.\nTajriba: 1 yil\\.",
-        "ru": "🚗  *Детейлинг Авто*\n\nПрофессиональный опыт в тонировке,\nбронепленке и ламинации\\.\nОпыт: 1 год\\.",
-        "en": "🚗  *Car Detailing*\n\nProfessional experience in car tinting,\nprotective film, and lamination\\.\nExperience: 1 year\\."
+        "uz": "🚗 *Automotive*\n\n◈ Detailing & Protection\n◈ Professional Experience: 1 year",
+        "ru": "🚗 *Автомобили*\n\n◈ Детейлинг и защита\n◈ Профессиональный опыт: 1 год",
+        "en": "🚗 *Automotive*\n\n◈ Detailing & Protection\n◈ Professional Experience: 1 year"
     }
 }

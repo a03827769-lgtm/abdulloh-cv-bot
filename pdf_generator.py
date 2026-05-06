@@ -1,13 +1,13 @@
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.units import inch
 from content import CV_DATA
 import os
 
 def generate_cv_pdf(lang: str, output_path: str, user_name: str = "Foydalanuvchi"):
-    """Generates a personalized premium PDF CV."""
+    """Generates an Elite Level professional PDF CV with Case Studies."""
     doc = SimpleDocTemplate(
         output_path, 
         pagesize=A4,
@@ -18,132 +18,70 @@ def generate_cv_pdf(lang: str, output_path: str, user_name: str = "Foydalanuvchi
     )
     styles = getSampleStyleSheet()
     
-    # --- Custom Styles ---
-    primary_color = colors.HexColor("#2563EB") # Modern Blue
-    secondary_color = colors.HexColor("#64748B") # Slate Gray
+    # Professional Palette
+    primary_color = colors.HexColor("#0f172a") # Darker Slate
+    accent_color = colors.HexColor("#2563eb") # Clear Blue
+    text_color = colors.HexColor("#334155")
     
-    header_style = ParagraphStyle(
-        'HeaderStyle',
-        parent=styles['Normal'],
-        fontSize=28,
-        textColor=primary_color,
-        fontName='Helvetica-Bold',
-        spaceAfter=5
-    )
-    
-    subtitle_style = ParagraphStyle(
-        'SubtitleStyle',
-        parent=styles['Normal'],
-        fontSize=14,
-        textColor=secondary_color,
-        fontName='Helvetica',
-        spaceAfter=20
-    )
-    
-    section_style = ParagraphStyle(
-        'SectionStyle',
-        parent=styles['Normal'],
-        fontSize=16,
-        textColor=primary_color,
-        fontName='Helvetica-Bold',
-        spaceBefore=20,
-        spaceAfter=10,
-        borderPadding=5,
-        borderWidth=0,
-    )
-    
-    item_title_style = ParagraphStyle(
-        'ItemTitle',
-        parent=styles['Normal'],
-        fontSize=12,
-        fontName='Helvetica-Bold',
-        spaceAfter=2
-    )
-    
-    body_style = ParagraphStyle(
-        'BodyStyle',
-        parent=styles['Normal'],
-        fontSize=10,
-        leading=14,
-        textColor=colors.black
-    )
+    # Custom Styles
+    name_style = ParagraphStyle('Name', fontSize=26, textColor=primary_color, fontName='Helvetica-Bold', spaceAfter=2)
+    sub_style = ParagraphStyle('Sub', fontSize=12, textColor=accent_color, fontName='Helvetica-Bold', spaceAfter=12)
+    sec_style = ParagraphStyle('Sec', fontSize=14, textColor=primary_color, fontName='Helvetica-Bold', spaceBefore=18, spaceAfter=10, borderPadding=(0,0,2,0), borderColor=accent_color, borderWidth=1)
+    body_style = ParagraphStyle('Body', fontSize=10, leading=14, textColor=text_color)
+    case_style = ParagraphStyle('Case', fontSize=9, leading=12, textColor=text_color, leftIndent=15)
     
     elements = []
     
-    # --- Header Section ---
-    elements.append(Paragraph(CV_DATA["name"].upper(), header_style))
-    elements.append(Paragraph("Mobilographer | Developer | AI Expert", subtitle_style))
+    # --- HEADER ---
+    elements.append(Paragraph(CV_DATA["name"].upper(), name_style))
+    elements.append(Paragraph("CREATIVE DIRECTOR | DEVELOPER | AI ENGINEER", sub_style))
     
-    # Contact Info Table
-    contact_text = [
-        [f"📍 {CV_DATA['location']}", f"📞 {CV_DATA['contacts']['telegram']}"],
-        [f"📧 abdulloh@ai.uz", f"📸 Instagram: {CV_DATA['contacts']['instagram']}"]
-    ]
-    contact_table = Table(contact_text, colWidths=[3*inch, 3*inch])
-    contact_table.setStyle(TableStyle([
-        ('FONTSIZE', (0,0), (-1,-1), 9),
-        ('TEXTCOLOR', (0,0), (-1,-1), secondary_color),
-        ('ALIGN', (0,0), (-1,-1), 'LEFT'),
-    ]))
-    elements.append(contact_table)
-    elements.append(Spacer(1, 10))
-    elements.append(Table([[primary_color]], colWidths=[7.5*inch], rowHeights=[2])) # Horizontal Line
+    contact = f"📍 {CV_DATA['location']}  |  💬 {CV_DATA['contacts']['telegram']}  |  📷 @{CV_DATA['contacts']['instagram']}"
+    elements.append(Paragraph(contact, body_style))
+    elements.append(Spacer(1, 15))
     
-    # --- About Me ---
-    about_titles = {"uz": "MEN HAQIMDA", "ru": "ОБО МНЕ", "en": "ABOUT ME"}
-    elements.append(Paragraph(about_titles[lang], section_style))
-    
-    about_texts = {
-        "uz": f"Men {CV_DATA['age']} yoshli zamonaviy texnologiyalar ishqiboziman. Hozirda {CV_DATA['education']['university']}da {CV_DATA['education']['major']} yo'nalishi bo'yicha tahsil olmoqdaman. Vizual san'at va dasturlashni uyg'unlashtirish orqali innovatsion yechimlar yaratish - mening asosiy maqsadim.",
-        "ru": f"Я 18-летний энтузиаст современных технологий. В настоящее время учусь в {CV_DATA['education']['university']} по направлению {CV_DATA['education']['major']}. Моя цель - создавать инновационные решения, объединяя визуальное искусство и программирование.",
-        "en": f"I am an 18-year-old tech enthusiast currently studying {CV_DATA['education']['major']} at {CV_DATA['education']['university']}. My goal is to create innovative solutions by combining visual arts and programming."
+    # --- SUMMARY ---
+    elements.append(Paragraph("PROFESSIONAL PROFILE", sec_style))
+    summary = {
+        "uz": "Innovatsion yechimlar yaratuvchi va vizual san'at orqali bizneslarga qiymat qo'shuvchi mutaxassis.",
+        "ru": "Специалист, создающий инновационные решения и приносящий пользу бизнесу через визуальное искусство.",
+        "en": "Specialist creating innovative solutions and adding value to businesses through visual arts."
     }
-    elements.append(Paragraph(about_texts[lang], body_style))
+    elements.append(Paragraph(summary[lang], body_style))
     
-    # --- Experience ---
-    exp_titles = {"uz": "ISH TAJRIBASI", "ru": "ОПЫТ РАБОТЫ", "en": "EXPERIENCE"}
-    elements.append(Paragraph(exp_titles[lang], section_style))
-    
-    for exp in CV_DATA["experience"]:
-        elements.append(Paragraph(f"{exp['title']} | {exp['duration']}", item_title_style))
-        desc = exp['desc'][lang] if isinstance(exp['desc'], dict) else exp['desc']
-        elements.append(Paragraph(desc, body_style))
+    # --- CASE STUDIES (The "Perfection" part) ---
+    elements.append(Paragraph("SELECTED CASE STUDIES", sec_style))
+    for proj in CV_DATA["projects"]:
+        elements.append(Paragraph(f"<b>{proj['name']}</b> ({proj['type']})", body_style))
+        elements.append(Paragraph(proj[lang], case_style))
         elements.append(Spacer(1, 8))
         
-    # --- Skills & Education (2 Columns) ---
-    skills_titles = {"uz": "KO'NIKMALAR", "ru": "НАВЫКИ", "en": "SKILLS"}
-    edu_titles = {"uz": "TA'LIM", "ru": "ОБРАЗОВАНИЕ", "en": "EDUCATION"}
+    # --- EXPERIENCE ---
+    elements.append(Paragraph("EXPERIENCE", sec_style))
+    for exp in CV_DATA["experience"]:
+        elements.append(Paragraph(f"<b>{exp['title']}</b> — {exp['duration']}", body_style))
     
-    # Prepare Skills Text
-    tech_skills = "<b>Technical:</b> " + ", ".join(CV_DATA["skills"]["technical"])
-    soft_list = CV_DATA["skills"]["soft"][lang] if isinstance(CV_DATA["skills"]["soft"], dict) else CV_DATA["skills"]["soft"]
-    soft_skills = "<b>Soft:</b> " + ", ".join(soft_list)
+    # --- SKILLS & EDUCATION ---
+    elements.append(Paragraph("CORE SKILLS", sec_style))
+    elements.append(Paragraph(", ".join(CV_DATA["skills"]["technical"]), body_style))
     
-    # Prepare Education Text
-    edu_info = f"<b>{CV_DATA['education']['university']}</b><br/>{CV_DATA['education']['major']} ({CV_DATA['education']['year']})"
+    elements.append(Paragraph("EDUCATION", sec_style))
+    edu = f"{CV_DATA['education']['university']} - {CV_DATA['education']['major']}"
+    elements.append(Paragraph(edu, body_style))
     
-    col1 = [
-        Paragraph(skills_titles[lang], section_style),
-        Paragraph(tech_skills, body_style),
-        Spacer(1, 5),
-        Paragraph(soft_skills, body_style)
-    ]
+    # --- CALL TO ACTION ---
+    elements.append(Spacer(1, 30))
+    cta_style = ParagraphStyle('CTA', parent=body_style, alignment=1, textColor=accent_color, fontName='Helvetica-Bold')
+    elements.append(Paragraph("🔗 VISIT MY DIGITAL ECOSYSTEM", cta_style))
+    elements.append(Paragraph("https://t.me/AbdullohCvbot", ParagraphStyle('Link', parent=body_style, alignment=1, fontSize=8)))
     
-    col2 = [
-        Paragraph(edu_titles[lang], section_style),
-        Paragraph(edu_info, body_style)
-    ]
+    # --- FOOTER ---
+    elements.append(Spacer(1, 20))
+    footer = f"<i>Eksklyuziv ravishda {user_name} uchun tayyorlandi | © 2024 Abdulloh Portfolio</i>"
+    elements.append(Paragraph(footer, ParagraphStyle('Footer', parent=body_style, alignment=1, fontSize=8, textColor=colors.grey)))
     
-    # Nested table for 2-column layout
-    col_table = Table([[col1, col2]], colWidths=[3.7*inch, 3.7*inch])
-    col_table.setStyle(TableStyle([
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-    ]))
-    elements.append(col_table)
-    
-    # --- Footer ---
-    elements.append(Spacer(1, 0.5*inch))
-    footer_text = f"<i>Maxsus {user_name} uchun tayyorlandi | Generated by {CV_DATA['name']} AI Assistant</i>"
-    elements.append(Paragraph(footer_text, ParagraphStyle('Footer', parent=body_style, alignment=1, textColor=secondary_color)))
-    
-    doc.build(elements)
+    try:
+        doc.build(elements)
+        return True
+    except Exception:
+        return False

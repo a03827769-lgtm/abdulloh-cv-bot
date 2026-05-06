@@ -7,3 +7,5 @@ class HireMeStates(StatesGroup):
     waiting_for_contact = State()
 class AdminStates(StatesGroup):
     waiting_for_broadcast = State()
+class AIState(StatesGroup):
+    chatting = State()
