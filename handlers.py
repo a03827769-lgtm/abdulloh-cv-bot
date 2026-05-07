@@ -17,6 +17,7 @@ from data.database import (
 import os
 import uuid
 import asyncio
+import logging
 
 router = Router()
 
@@ -148,27 +149,27 @@ async def ai_mode_start(message: Message, state: FSMContext):
 async def ai_voice_handler(message: Message, state: FSMContext):
     await message.bot.send_chat_action(chat_id=message.chat.id, action="typing")
     file_id = message.voice.file_id
-    file = await message.bot.get_file(file_id)
-    file_path = f"data/{uuid.uuid4()}.ogg"
-    await message.bot.download_file(file.file_path, file_path)
-
-    text = await transcribe_voice(file_path)
-    if os.path.exists(file_path): os.remove(file_path)
-
-    if not text:
-        await message.reply("❌ Ovozni aniqlab bo'lmadi. Iltimos, qaytadan urining.")
-        return
-
-    lang = await get_user_language(message.from_user.id)
-    response = await get_ai_response(text, message.from_user.id, lang)
-
-    formatted_resp = f"🎤 *Sizning savolingiz:* {esc(text)}\n\n{response}"
     try:
-        await message.reply(formatted_resp, parse_mode="Markdown")
-    except Exception:
-        await message.reply(formatted_resp)
+        file = await message.bot.get_file(file_id)
+        file_path = f"data/{uuid.uuid4()}.ogg"
+        await message.bot.download_file(file.file_path, file_path)
 
-    await log_message(message.from_user.id, text, response)
+        text = await transcribe_voice(file_path)
+        if os.path.exists(file_path): os.remove(file_path)
+
+        if not text:
+            await message.reply("❌ Ovozni aniqlab bo'lmadi. Iltimos, qaytadan urining.")
+            return
+
+        lang = await get_user_language(message.from_user.id)
+        response = await get_ai_response(text, message.from_user.id, lang)
+
+        # Use simple Markdown for AI responses to avoid escaping issues
+        await message.reply(f"🎤 *Sizning savolingiz:* {text}\n\n{response}", parse_mode="Markdown")
+        await log_message(message.from_user.id, text, response)
+    except Exception as e:
+        logging.error(f"Voice Handler Error: {e}")
+        await message.reply("❌ Ovozli xabar bilan ishlashda xatolik yuz berdi.")
 
 @router.message(AIState.chatting, F.text)
 async def ai_chat_handler(message: Message, state: FSMContext):
@@ -180,8 +181,11 @@ async def ai_chat_handler(message: Message, state: FSMContext):
     await message.bot.send_chat_action(chat_id=message.chat.id, action="typing")
     lang = await get_user_language(message.from_user.id)
     response = await get_ai_response(message.text, message.from_user.id, lang)
-    try: await message.reply(response, parse_mode="Markdown")
-    except Exception: await message.reply(response)
+    try:
+        # Fallback to plain text if Markdown fails due to LLM formatting
+        await message.reply(response, parse_mode="Markdown")
+    except Exception:
+        await message.reply(response)
     await log_message(message.from_user.id, message.text, response)
 
 # ━━━━━━━━━━━━━━━━━━━━

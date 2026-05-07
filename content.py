@@ -170,7 +170,7 @@ MESSAGES = {
             f"Пришло время автоматизировать ваш бизнес через AI или создать премиальный визуал\\.\n\n"
             f"◈ *Чем я могу вам помочь?*"
         ),
-        "menu": f"✦ *Главное Меню*\n{H}",
+        "menu": f"✦ *Главное Меню*\n{H}\n\nВыберите раздел:",
         "about": (
             f"✦ *BRAND IDENTITY*\n"
             f"{H}\n\n"
@@ -179,9 +179,20 @@ MESSAGES = {
             f"🥋 *Тхэквондо* \\(5\\-кратный медалист\\)\n\n"
             f"{CV_DATA['philosophy']['ru']}"
         ),
-        "portfolio": f"✦ *ПОРТФОЛИО*\n{H}",
-        "faq": f"✦ *ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ*\n{H}",
-        "contact": f"✦ *КОНТАКТЫ*\n{H}\n\n📞 {esc(CV_DATA['contacts']['phone'])}\n📧 {esc(CV_DATA['contacts']['email'])}",
+        "portfolio": f"✦ *ПОРТФОЛИО*\n{H}\n\nНаши проекты:",
+        "faq": (
+            f"✦ *ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ*\n"
+            f"{H}\n\n"
+            f"◈ *Цены?*\nИндивидуально для каждого проекта\\.\n\n"
+            f"◈ *AI Боты?*\nРазработка от 5 дней\\."
+        ),
+        "contact": (
+            f"✦ *КОНТАКТЫ*\n"
+            f"{H}\n\n"
+            f"📞 {esc(CV_DATA['contacts']['phone'])}\n"
+            f"📧 {esc(CV_DATA['contacts']['email'])}\n"
+            f"🌐 {esc(CV_DATA['contacts']['domain'])}"
+        ),
         "lang_select": "🌐 *Выберите язык:*",
         "ai_intro": "✦ *ЧАТ С AI КОНСУЛЬТАНТОМ*\n{H}\n\nЗадавайте любые вопросы по SMM, видео или ботам\\.",
         "buttons": {
@@ -206,7 +217,7 @@ MESSAGES = {
             f"It's time to automate your business with AI or create premium visuals\\.\n\n"
             f"◈ *How can I assist you?*"
         ),
-        "menu": f"✦ *Main Menu activated*\n{H}",
+        "menu": f"✦ *Main Menu activated*\n{H}\n\nExplore our sections:",
         "about": (
             f"✦ *BRAND IDENTITY*\n"
             f"{H}\n\n"
@@ -215,9 +226,20 @@ MESSAGES = {
             f"🥋 *Taekwondo* \\(5\\-time Medalist\\)\n\n"
             f"{CV_DATA['philosophy']['en']}"
         ),
-        "portfolio": f"✦ *PORTFOLIO*\n{H}",
-        "faq": f"✦ *FAQ*\n{H}",
-        "contact": f"✦ *CONNECT*\n{H}\n\n📞 {esc(CV_DATA['contacts']['phone'])}\n📧 {esc(CV_DATA['contacts']['email'])}",
+        "portfolio": f"✦ *PORTFOLIO*\n{H}\n\nCheck our latest work:",
+        "faq": (
+            f"✦ *FAQ*\n"
+            f"{H}\n\n"
+            f"◈ *Pricing?*\nCustom based on value and complexity\\.\n\n"
+            f"◈ *Services?*\nAI Bots, Cinematic Visuals, and SMM Architecture\\."
+        ),
+        "contact": (
+            f"✦ *CONNECT*\n"
+            f"{H}\n\n"
+            f"📞 {esc(CV_DATA['contacts']['phone'])}\n"
+            f"📧 {esc(CV_DATA['contacts']['email'])}\n"
+            f"🌐 {esc(CV_DATA['contacts']['domain'])}"
+        ),
         "lang_select": "🌐 *Choose your language:*",
         "ai_intro": "✦ *AI CONSULTANT CHAT*\n{H}\n\nAsk me anything about SMM, Video Production, or AI Systems\\.",
         "buttons": {
