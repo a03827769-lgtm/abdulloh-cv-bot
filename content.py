@@ -1,221 +1,229 @@
 """
-EXECUTIVE DIGITAL IDENTITY - ABDULLOH v4.0
-Theme: Hyper-Professional, Expert-Led, Result-Oriented
+EXECUTIVE DIGITAL IDENTITY - ABDULLOH MUHAMMADJONOV v5.0
+Theme: Elite, Multidisciplinary, Result-Oriented
 """
 
 H = "──────────────────────────"
 
+def esc(text: str) -> str:
+    """Safe MarkdownV2 escaping."""
+    if not text: return ""
+    chars = ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!']
+    res = str(text)
+    for c in chars:
+        res = res.replace(c, f'\\{c}')
+    return res
+
 CV_DATA = {
-    "name": "Muhammadjonov Abdulloh",
-    "title": "Creative Technologist & AI Architect",
+    "name": "Abdulloh Muhammadjonov",
+    "title": "Creative Technologist | SMM Specialist | AI Architect",
+    "age": 18,
+    "location": "Tashkent, Uzbekistan",
     "philosophy": {
-        "uz": "◈ *Falsafa:* 'Texnologiya — bu ruhsiz asbob, san'at esa unga jon beradi. Mening vazifam — AI aniqligi va vizual san'at hissiyotini birlashtirib, bizneslar uchun yangi davr raqamli identifikatsiyasini yaratish.'",
-        "ru": "◈ *Философия:* 'Технология — это бездушный инструмент, а искусство вдыхает в него жизнь. Моя миссия — объединить точность AI и эмоции визуального искусства для создания цифровой идентичности новой эры.'",
-        "en": "◈ *Philosophy:* 'Technology is a soulless tool; art gives it a soul. My mission is to merge AI precision with visual emotion to create a new-era digital identity for businesses.'"
+        "uz": "◈ *Falsafa:* 'Men texnologiya va san'atning kesishish nuqtasida ishlayman. Maqsadim — AI orqali bizneslarni avtomatlashtirish va cinematic vizuallar orqali brendlarni yangi bosqichga olib chiqish.'",
+        "ru": "◈ *Философия:* 'Я работаю на стыке технологий и искусства. Моя цель — автоматизировать бизнес через AI и выводить бренды на новый уровень с помощью кинематографичного визуала.'",
+        "en": "◈ *Philosophy:* 'I work at the intersection of technology and art. My goal is to automate businesses via AI and elevate brands to new heights through cinematic visuals.'"
     },
     "usp": {
-        "uz": "Gen-Z ijodkorining tezkorligi va AI muhandisining aniqligi uyg'unligi.",
-        "ru": "Сочетание скорости креатора Gen-Z и точности AI-инженера.",
-        "en": "A fusion of Gen-Z creator agility and AI engineer precision."
+        "uz": "Gen-Z ijodkorining tezkorligi, SMM strategiyasining chuqurligi va AI muhandisining aniqligi.",
+        "ru": "Скорость креатора Gen-Z, глубина SMM-стратегии и точность AI-инженера.",
+        "en": "The agility of a Gen-Z creator, the depth of an SMM strategy, and the precision of an AI engineer."
     },
     "contacts": {
+        "phone": "+998 88 788 70 11",
+        "email": "abdullohmuhammadjonov777@gmail.com",
         "telegram": "@abdulloh_ai",
         "instagram": "abdullokh_mk",
-        "portfolio": "https://t.me/upgcard",
-        "email": "abdulloh@example.com" # Placeholder
+        "portfolio_channel": "t.me/upgcard",
+        "instagram_url": "https://www.instagram.com/abdullokh_mk",
+        "domain": "abdullohvfx.online"
     },
+    "education": [
+        {
+            "institution": "Nordic University",
+            "major": "Economics",
+            "period": "2025 - Present",
+            "details": "1st year student, focusing on Digital Economy and Market Trends."
+        },
+        {
+            "institution": "Proweb Learning Center",
+            "major": "Web Development (Offline)",
+            "period": "1 Year",
+            "details": "Professional training in HTML, CSS, JavaScript, and React. Certificate obtained."
+        },
+        {
+            "institution": "IT Park Uzbekistan",
+            "major": "Professional Video Editing",
+            "period": "6 Months",
+            "details": "Advanced course in cinematic editing and motion design."
+        }
+    ],
     "experience": [
         {
-            "title": "Creative Director (Visual Storytelling)",
+            "title": "Freelance SMM & Content Creator",
             "duration": "1.5+ Years",
             "desc": {
-                "uz": "Brendlar uchun cinematic vizual strategiyalar ishlab chiqish. 10M+ dan ortiq umumiy ko'rilishga ega reklamalar muallifi.",
-                "ru": "Разработка кинематографических визуальных стратегий для брендов. Автор рекламы с общим охватом более 10 млн просмотров.",
-                "en": "Developing cinematic visual strategies for brands. Author of commercials with over 10M+ cumulative views."
+                "uz": "100+ dan ortiq cinematic reels va reklama roliklari yaratish. 'Aka-uka Tanirovka' va boshqa brendlar uchun SMM strategiyalari.",
+                "ru": "Создание 100+ кинематографичных рилсов и рекламных роликов. SMM-стратегии для 'Aka-uka Tanirovka' и других брендов.",
+                "en": "Creating 100+ cinematic reels and commercials. SMM strategies for brands like 'Aka-uka Tanirovka' and others."
             }
         },
         {
-            "title": "Senior AI Bot Architect",
+            "title": "AI Bot Architect & Developer",
             "duration": "1 Year",
             "desc": {
-                "uz": "Biznes jarayonlarini 90% gacha avtomatlashtiruvchi murakkab AI ekotizimlarni loyihalash va joriy etish.",
-                "ru": "Проектирование и внедрение сложных систем AI, автоматизирующих бизнес-процессы до 90%.",
-                "en": "Designing and implementing complex AI ecosystems that automate business processes by up to 90%."
+                "uz": "'Tozalash Servis' uchun to'liq funksional AI-buyurtma botini yaratish. Biznes jarayonlarini avtomatlashtirish bo'yicha ekspert.",
+                "ru": "Создание полнофункционального AI-бота для приема заказов для 'Tozalash Servis'. Эксперт по автоматизации бизнес-процессов.",
+                "en": "Developing a fully functional AI ordering bot for 'Tozalash Servis'. Expert in business process automation."
             }
         }
     ],
-    "reviews": [
+    "projects": [
         {
-            "client": "Premium Logistics Co.",
-            "text": {
-                "uz": "\"Abdulloh bizning moliya tizimimizni AI orqali shunday tartibga soldiki, xatoliklar nolga tushdi. Haqiqiy professional!\"",
-                "ru": "\"Абдуллох так настроил нашу финансовую систему через AI, что ошибки упали до нуля. Настоящий профи!\"",
-                "en": "\"Abdulloh streamlined our financial system via AI so effectively that errors dropped to zero. A true professional!\""
-            }
+            "name": "Tozalash Servis Bot",
+            "url": "https://t.me/tozalash_servisbot",
+            "uz": "Mijozlardan buyurtma oladigan va AI yordamida muloqot qiladigan mukammal tizim.",
+            "en": "A perfect system that takes orders and communicates using AI."
         },
         {
-            "client": "Art Gallery Dubai",
-            "text": {
-                "uz": "\"U yaratgan cinematic reelslar sotuvimizni 40% ga oshirdi. Vizual didi juda yuqori.\"",
-                "ru": "\"Его кинематографические рилсы увеличили наши продажи на 40%. У него исключительный визуальный вкус.\"",
-                "en": "\"The cinematic reels he created increased our sales by 40%. His visual taste is exceptional.\""
-            }
+            "name": "Aka-Uka Tanirovka",
+            "type": "Full SMM Service",
+            "uz": "Brendning vizual identifikatsiyasi va ijtimoiy tarmoqlardagi faolligini oshirish.",
+            "en": "Visual identity and social media growth strategy for the brand."
         }
     ],
     "skills": {
-        "technical": ["Python", "AI Integration", "Prompt Engineering", "FastAPI", "React"],
-        "soft": ["Strategic Thinking", "Visual Storytelling", "Project Management", "Leadership"]
+        "visual": ["Reels Production", "Commercial Video", "Auto Content", "Vlog Editing", "Color Grading (CapCut/VN)"],
+        "tech": ["Python (Bot Dev)", "HTML/CSS", "JavaScript", "React", "AI Prompt Engineering"],
+        "ai": ["ChatGPT", "Midjourney", "Leonardo AI", "Runway", "Kling"],
+        "smm": ["Content Plan", "Idea Generation", "Copywriting", "Page Management", "Telegram Growth"]
+    },
+    "achievements": {
+        "sports": "Taekwondo - Highest belt level, 5-time City level medalist.",
+        "certs": ["IELTS (Speaking high)", "Web Development (Proweb)", "Video Editing (IT Park)"]
     }
 }
 
 MESSAGES = {
     "uz": {
         "start": (
-            f"✦ *EXECUTIVE DIGITAL IDENTITY: ABDULLOH*\n"
+            f"✦ *ELITE DIGITAL ECOSYSTEM: ABDULLOH*\n"
             f"{H}\n\n"
-            f"Siz innovatsiyalar va yuqori vizual did kesishgan nuqtadasiz\\. "
-            f"Men shunchaki bot emasman — men Abdullohning raqamli strategiman\\.\n\n"
-            f"◈ *Sizga qanday qiymat bera olamiz?*"
+            f"Salom! Men Abdulloh Muhammadjonovning raqamli strategiman\\. "
+            f"Biznesingizni AI orqali avtomatlashtirish yoki premium vizuallar yaratish vaqti keldi\\.\n\n"
+            f"◈ *Sizga qanday yordam bera olaman?*"
         ),
-        "menu": f"✦ *Asosiy Menyuga xush kelibsiz*\n{H}\n\nQuyidagi bo'limlardan birini tanlang:",
+        "menu": f"✦ *Asosiy Menyuga xush kelibsiz*\n{H}\n\nO'zingizni qiziqtirgan bo'limni tanlang:",
         "about": (
-            f"✦ *BRAND PHILOSOPHY*\n"
+            f"✦ *BRAND IDENTITY*\n"
             f"{H}\n\n"
+            f"👤 *Abdulloh Muhammadjonov* \\(18 yosh\\)\n"
+            f"🎓 *Nordic University* iqtisodchisi\n"
+            f"🥋 *Taekwondo* ustasi \\(5 karra sovrindor\\)\n\n"
             f"{CV_DATA['philosophy']['uz']}\n\n"
-            f"◈ *Asosiy tamoyillar:* Intizom, Eksperimental yondashuv va Mukammallik\\.\n"
-            f"◈ *Sport:* Taekwondo orqali shakllangan 'Hech qachon taslim bo'lmaslik' mentaliteti\\."
+            f"◈ *Slogan:* 'Innovatsiya va Estetika uyg'unligi\\.'"
         ),
-        "portfolio": f"✦ *STRATEGIK LOYIHALAR*\n{H}\n\nQuyidagi yo'nalishlardan birini tanlang va ishimiz sifatiga baho bering:",
+        "portfolio": f"✦ *PORTFOLIO & ISHLAR*\n{H}\n\nQuyidagi yo'nalishlar bo'yicha tajribamizni ko'ring:",
         "faq": (
-            f"✦ *KO'P BERILADIGAN SAVOLLAR*\n"
+            f"✦ *SAVOL-JAVOBLAR*\n"
             f"{H}\n\n"
-            f"◈ *Qanday xizmatlarni ko'rsatasiz?*\n"
-            f"Biz cinematic video ishlab chiqarish va biznes jarayonlarini AI orqali avtomatlashtirishga ixtisoslashganmiz\\.\n\n"
-            f"◈ *Loyiha qancha vaqt oladi?*\n"
-            f"Murakkablikka qarab: Video \\(3\\-7 kun\\), AI Tizimlar \\(14\\-30 kun\\)\\.\n\n"
-            f"◈ *Narxlar qanday?*\n"
-            f"Har bir loyiha individual hisoblanadi, chunki biz 'shablon' yechimlardan qochamiz\\."
+            f"◈ *Xizmatlar narxi qancha?*\n"
+            f"Har bir loyiha uning murakkabligidan kelib chiqib individual narxlanadi\\. Biznes qiymati doim ustuvor\\.\n\n"
+            f"◈ *SMM xizmatiga nimalar kiradi?*\n"
+            f"Strategiya, suratga olish, montaj va sahifa yuritish — hammasi ichida\\.\n\n"
+            f"◈ *Botni qanchada yasaysiz?*\n"
+            f"Oddiy botlar 3\\-5 kun, murakkab AI tizimlar 2 hafta va undan ko'proq\\."
         ),
         "contact": (
-            f"✦ *ALOQA MARKAZI*\n"
+            f"✦ *BOG'LANISH*\n"
             f"{H}\n\n"
-            f"Loyiha bo'yicha muhokama yoki takliflar uchun quyidagi kanallar ochiq:"
+            f"📞 *Tel:* {esc(CV_DATA['contacts']['phone'])}\n"
+            f"📧 *Email:* {esc(CV_DATA['contacts']['email'])}\n"
+            f"🌐 *Web:* {esc(CV_DATA['contacts']['domain'])}\n\n"
+            f"Loyiha muhokamasi uchun istalgan kanal orqali yozishingiz mumkin\\."
         ),
         "lang_select": "🌐 *Muloqot tilini tanlang:*",
         "ai_intro": (
             f"✦ *AI STRATEG BILAN MULOQOT*\n"
             f"{H}\n\n"
-            f"Savollaringizni yo'llang\\. Men Abdullohning tajribasi va qarashlaridan kelib chiqib sizga javob beraman\\."
+            f"Savollaringizni yo'llang\\. Men Abdullohning barcha tajribasi: SMM, Mobilografiya va Dasturlash bo'yicha sizga maslahat beraman\\."
         ),
-        "hire_intro": "🤝 *STRATEGIK HAMKORLIK*\n\nLoyihangiz tafsilotlarini qoldiring\\. Men ularni tahlil qilaman va Abdulloh bilan bog'lanishingiz uchun zamin yarataman\\.",
         "buttons": {
-            "about": "💎 Falsafa",
-            "experience": "💼 Ekspertiza",
-            "skills": "🛠 Texnologiyalar",
-            "portfolio": "📁 Loyihalar",
-            "contact": "📞 Aloqa",
+            "about": "💎 Brend",
+            "experience": "💼 Tajriba",
+            "skills": "🛠 Mahorat",
+            "portfolio": "📁 Portfolio",
+            "contact": "📞 Kontakt",
             "lang": "🌐 Til",
             "hire": "🤝 Hamkorlik",
             "mini_app": "🚀 Web Experience",
-            "ai_chat": "🤖 AI Strateg",
-            "faq": "❓ Savollar",
+            "ai_chat": "🤖 AI Konsultant",
+            "faq": "❓ FAQ",
             "back": "⬅️ Ortga"
         }
     },
     "ru": {
         "start": (
-            f"✦ *EXECUTIVE DIGITAL IDENTITY: ABDULLOH*\n"
+            f"✦ *ELITE DIGITAL ECOSYSTEM: ABDULLOH*\n"
             f"{H}\n\n"
-            f"Вы находитесь на пересечении инноваций и высокого визуального вкуса\\. "
-            f"Я не просто бот — я цифровой стратег Абдуллоха\\.\n\n"
-            f"◈ *Какую ценность мы можем вам предложить?*"
+            f"Привет! Я цифровой стратег Абдуллоха Мухаммаджонова\\. "
+            f"Пришло время автоматизировать ваш бизнес через AI или создать премиальный визуал\\.\n\n"
+            f"◈ *Чем я могу вам помочь?*"
         ),
-        "menu": f"✦ *Добро пожаловать в Главное Меню*\n{H}\n\nВыберите интересующий раздел:",
+        "menu": f"✦ *Главное Меню*\n{H}",
         "about": (
-            f"✦ *ФИЛОСОФИЯ БРЕНДА*\n"
+            f"✦ *BRAND IDENTITY*\n"
             f"{H}\n\n"
-            f"{CV_DATA['philosophy']['ru']}\n\n"
-            f"◈ *Принципы:* Дисциплина, Экспериментальный подход и Совершенство\\.\n"
-            f"◈ *Спорт:* Менталитет 'Никогда не сдаваться', сформированный Тхэквондо\\."
+            f"👤 *Абдуллох Мухаммаджонов* \\(18 лет\\)\n"
+            f"🎓 *Nordic University* \\(Экономика\\)\n"
+            f"🥋 *Тхэквондо* \\(5\\-кратный медалист\\)\n\n"
+            f"{CV_DATA['philosophy']['ru']}"
         ),
-        "portfolio": f"✦ *СТРАТЕГИЧЕСКИЕ ПРОЕКТЫ*\n{H}\n\nВыберите направление, чтобы оценить качество нашей работы:",
-        "faq": (
-            f"✦ *ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ*\n"
-            f"{H}\n\n"
-            f"◈ *Какие услуги вы предоставляете?*\n"
-            f"Мы специализируемся на кинематографическом видеопроизводстве и автоматизации бизнеса через AI\\.\n\n"
-            f"◈ *Сколько времени занимает проект?*\n"
-            f"В зависимости от сложности: Видео \\(3\\-7 дней\\), AI Системы \\(14\\-30 дней\\)\\.\n\n"
-            f"◈ *Какие цены?*\n"
-            f"Каждый проект рассчитывается индивидуально, так как мы избегаем шаблонных решений\\."
-        ),
-        "contact": (
-            f"✦ *КОНТАКТНЫЙ ЦЕНТР*\n"
-            f"{H}\n\n"
-            f"Для обсуждения проектов или предложений открыты следующие каналы:"
-        ),
-        "lang_select": "🌐 *Выберите язык общения:*",
-        "ai_intro": (
-            f"✦ *ЧАТ С AI СТРАТЕГОМ*\n"
-            f"{H}\n\n"
-            f"Задавайте свои вопросы\\. Я отвечу вам, основываясь на опыте и видении Абдуллоха\\."
-        ),
+        "portfolio": f"✦ *ПОРТФОЛИО*\n{H}",
+        "faq": f"✦ *ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ*\n{H}",
+        "contact": f"✦ *КОНТАКТЫ*\n{H}\n\n📞 {esc(CV_DATA['contacts']['phone'])}\n📧 {esc(CV_DATA['contacts']['email'])}",
+        "lang_select": "🌐 *Выберите язык:*",
+        "ai_intro": "✦ *ЧАТ С AI КОНСУЛЬТАНТОМ*\n{H}\n\nЗадавайте любые вопросы по SMM, видео или ботам\\.",
         "buttons": {
-            "about": "💎 Философия",
-            "experience": "💼 Экспертиза",
-            "skills": "🛠 Технологии",
+            "about": "💎 Бренд",
+            "experience": "💼 Опыт",
+            "skills": "🛠 Навыки",
             "portfolio": "📁 Проекты",
-            "contact": "📞 Связь",
+            "contact": "📞 Контакты",
             "lang": "🌐 Язык",
             "hire": "🤝 Партнерство",
             "mini_app": "🚀 Web Experience",
-            "ai_chat": "🤖 AI Стратег",
-            "faq": "❓ Вопросы",
+            "ai_chat": "🤖 AI Консультант",
+            "faq": "❓ FAQ",
             "back": "⬅️ Назад"
         }
     },
     "en": {
         "start": (
-            f"✦ *EXECUTIVE DIGITAL IDENTITY: ABDULLOH*\n"
+            f"✦ *ELITE DIGITAL ECOSYSTEM: ABDULLOH*\n"
             f"{H}\n\n"
-            f"You are at the intersection of innovation and high visual taste\\. "
-            f"I am not just a bot — I am Abdulloh's digital strategist\\.\n\n"
-            f"◈ *What value can we offer you?*"
+            f"Hello! I am Abdulloh Muhammadjonov's digital strategist\\. "
+            f"It's time to automate your business with AI or create premium visuals\\.\n\n"
+            f"◈ *How can I assist you?*"
         ),
-        "menu": f"✦ *Welcome to the Main Menu*\n{H}\n\nSelect a section to explore:",
+        "menu": f"✦ *Main Menu activated*\n{H}",
         "about": (
-            f"✦ *BRAND PHILOSOPHY*\n"
+            f"✦ *BRAND IDENTITY*\n"
             f"{H}\n\n"
-            f"{CV_DATA['philosophy']['en']}\n\n"
-            f"◈ *Core Values:* Discipline, Experimental Approach, and Excellence\\.\n"
-            f"◈ *Sports:* 'Never Give Up' mentality forged through Taekwondo\\."
+            f"👤 *Abdulloh Muhammadjonov* \\(18 years old\\)\n"
+            f"🎓 *Nordic University* \\(Economics\\)\n"
+            f"🥋 *Taekwondo* \\(5\\-time Medalist\\)\n\n"
+            f"{CV_DATA['philosophy']['en']}"
         ),
-        "portfolio": f"✦ *STRATEGIC PROJECTS*\n{H}\n\nChoose a category to evaluate our work quality:",
-        "faq": (
-            f"✦ *FREQUENTLY ASKED QUESTIONS*\n"
-            f"{H}\n\n"
-            f"◈ *What services do you provide?*\n"
-            f"We specialize in cinematic video production and business automation through AI\\.\n\n"
-            f"◈ *How long does a project take?*\n"
-            f"Depending on complexity: Video \\(3\\-7 days\\), AI Systems \\(14\\-30 days\\)\\.\n\n"
-            f"◈ *What is the pricing?*\n"
-            f"Each project is priced individually, as we avoid cookie\\-cutter solutions\\."
-        ),
-        "contact": (
-            f"✦ *CONTACT CENTER*\n"
-            f"{H}\n\n"
-            f"The following channels are open for project discussions or inquiries:"
-        ),
+        "portfolio": f"✦ *PORTFOLIO*\n{H}",
+        "faq": f"✦ *FAQ*\n{H}",
+        "contact": f"✦ *CONNECT*\n{H}\n\n📞 {esc(CV_DATA['contacts']['phone'])}\n📧 {esc(CV_DATA['contacts']['email'])}",
         "lang_select": "🌐 *Choose your language:*",
-        "ai_intro": (
-            f"✦ *CHAT WITH AI STRATEGIST*\n"
-            f"{H}\n\n"
-            f"Send your questions\\. I will answer based on Abdulloh's experience and vision\\."
-        ),
+        "ai_intro": "✦ *AI CONSULTANT CHAT*\n{H}\n\nAsk me anything about SMM, Video Production, or AI Systems\\.",
         "buttons": {
-            "about": "💎 Philosophy",
-            "experience": "💼 Expertise",
-            "skills": "🛠 Technologies",
+            "about": "💎 Brand",
+            "experience": "💼 Experience",
+            "skills": "🛠 Skills",
             "portfolio": "📁 Projects",
             "contact": "📞 Connect",
             "lang": "🌐 Language",
@@ -230,19 +238,19 @@ MESSAGES = {
 
 PORTFOLIO_DATA = {
     "mob": {
-        "uz": "📸 *VISUAL ARTS & CINEMATOGRAPHY*\n\nMen brendlar uchun shunchaki video emas, balki ularning xarakterini ko'rsatuvchi cinematic asarlar yarataman\\.\n\n◈ *Yo'nalishlar:* High-end Reels, Reklama roliklari, Vizual brending\\.",
-        "ru": "📸 *VISUAL ARTS & CINEMATOGRAPHY*\n\nЯ создаю для брендов не просто видео, а кинематографические произведения, раскрывающие их характер\\.\n\n◈ *Направления:* High-end Reels, Рекламные ролики, Визуальный брендинг\\.",
-        "en": "📸 *VISUAL ARTS & CINEMATOGRAPHY*\n\nI don't just create videos; I craft cinematic works that reveal the character of a brand\\.\n\n◈ *Specialties:* High-end Reels, Commercials, Visual Branding\\."
+        "uz": "📸 *VISUAL ARTS & MOBILOGRAPHY*\n\nMen CapCut va VN orqali cinematic asarlar yarataman\\. Har bir kadr brendingiz darajasini ko'rsatadi\\.\n\n◈ *Yo'nalishlar:* Reels, Reklama, Restoran/Cafe, Avto, Vlog\\.",
+        "ru": "📸 *ВИЗУАЛЬНОЕ ИСКУССТВО*\n\nСоздаю кинематографичные рилсы в CapCut/VN\\. Каждый кадр работает на ваш статус\\.\n\n◈ *Направления:* Reels, Реклама, Рестораны, Авто, Влоги\\.",
+        "en": "📸 *VISUAL ARTS & MOBILOGRAPHY*\n\nCrafting cinematic masterpieces using CapCut/VN\\. Every frame elevates your brand status\\.\n\n◈ *Specialties:* Reels, Ads, Restaurant, Auto, Vlogs\\."
     },
     "code": {
-        "uz": "💻 *AI ARCHITECTURE & DEVELOPMENT*\n\nMurakkab biznes muammolarini algoritmlar va sun'iy intellekt orqali hal qilaman\\.\n\n◈ *Yechimlar:* Enterprise Bots, AI CRM Systems, Business Automation\\.",
-        "ru": "💻 *AI ARCHITECTURE & DEVELOPMENT*\n\nЯ решаю сложные бизнес-задачи с помощью алгоритмов и искусственного интеллекта\\.\n\n◈ *Решения:* Enterprise Bots, AI CRM Systems, Автоматизация бизнеса\\.",
-        "en": "💻 *AI ARCHITECTURE & DEVELOPMENT*\n\nI solve complex business problems through algorithms and artificial intelligence\\.\n\n◈ *Solutions:* Enterprise Bots, AI CRM Systems, Business Automation\\."
+        "uz": "💻 *WEB & BOT DEVELOPMENT*\n\nMurakkab botlar va professional veb-saytlar yaratish bo'yicha Proweb va IT Park tajribasi\\.\n\n◈ *Yechimlar:* AI Bots, CRM Systems, Portfolio Websites\\.",
+        "ru": "💻 *WEB & BOT DEVELOPMENT*\n\nОпыт Proweb и IT Park в создании сложных ботов и профессиональных сайтов\\.",
+        "en": "💻 *WEB & BOT DEVELOPMENT*\n\nLeveraging Proweb and IT Park expertise to build complex bots and professional websites\\."
     }
 }
 
 MEDIA = {
-    "start": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
-    "about": "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+    "start": "https://images.unsplash.com/photo-1512756783935-7c8d9d499acd",
+    "about": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5",
     "mobilography": "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
 }

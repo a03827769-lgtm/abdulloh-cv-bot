@@ -3,7 +3,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery, FSInputFile, InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 from aiogram.fsm.context import FSMContext
 
-from content import MESSAGES, CV_DATA, PORTFOLIO_DATA, H, MEDIA
+from content import MESSAGES, CV_DATA, PORTFOLIO_DATA, H, MEDIA, esc
 from keyboards import get_main_menu, get_contact_inline, get_language_kb, get_portfolio_kb, get_ai_keyboard
 from config import ADMIN_ID, DATABASE_PATH, WEB_APP_URL
 from ai_engine import get_ai_response, transcribe_voice
@@ -23,15 +23,6 @@ router = Router()
 # ━━━━━━━━━━━━━━━━━━━━
 # UTILITY & SECURITY
 # ━━━━━━━━━━━━━━━━━━━━
-
-def esc(text: str) -> str:
-    """Ultra-safe MarkdownV2 escaping for production."""
-    if not text: return ""
-    chars = ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!']
-    res = str(text)
-    for c in chars:
-        res = res.replace(c, f'\\{c}')
-    return res
 
 async def notify_admin(bot, user, action: str):
     """Professional admin notifications."""
@@ -96,8 +87,9 @@ async def btn_skills(message: Message):
     lang = await get_user_language(uid)
     header = {"uz": "MAHORAT", "ru": "НАВЫКИ", "en": "SKILLS"}
     text = f"✦ *{header[lang]}*\n{H}\n\n"
-    text += f"◈ *Technical:* {esc(', '.join(CV_DATA['skills']['technical']))}\n"
-    text += f"◈ *Soft:* {esc(', '.join(CV_DATA['skills']['soft']))}\n"
+    text += f"◈ *Creative:* {esc(', '.join(CV_DATA['skills']['visual']))}\n"
+    text += f"◈ *Technical:* {esc(', '.join(CV_DATA['skills']['tech']))}\n"
+    text += f"◈ *SMM:* {esc(', '.join(CV_DATA['skills']['smm']))}\n"
     await message.answer(text, parse_mode="MarkdownV2")
 
 @router.message(F.text.in_(get_btns("portfolio")))
@@ -169,7 +161,13 @@ async def ai_voice_handler(message: Message, state: FSMContext):
 
     lang = await get_user_language(message.from_user.id)
     response = await get_ai_response(text, message.from_user.id, lang)
-    await message.reply(f"🎤 *Sizning savolingiz:* {esc(text)}\n\n{response}", parse_mode="Markdown")
+
+    formatted_resp = f"🎤 *Sizning savolingiz:* {esc(text)}\n\n{response}"
+    try:
+        await message.reply(formatted_resp, parse_mode="Markdown")
+    except Exception:
+        await message.reply(formatted_resp)
+
     await log_message(message.from_user.id, text, response)
 
 @router.message(AIState.chatting, F.text)
