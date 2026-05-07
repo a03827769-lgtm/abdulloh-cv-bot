@@ -16,6 +16,7 @@ from data.database import (
 )
 import os
 import uuid
+import asyncio
 
 router = Router()
 
@@ -85,7 +86,6 @@ async def btn_experience(message: Message):
     header = {"uz": "TAJRIBA", "ru": "ОПЫТ", "en": "EXPERIENCE"}
     text = f"✦ *{header[lang]}*\n{H}\n\n"
     for exp in CV_DATA["experience"]:
-        # Title and Duration are safe, description is already formatted
         text += f"◈  *{esc(exp['title'])}* \\({esc(exp['duration'])}\\)\n└ {exp['desc'][lang]}\n\n"
     await message.answer(text, parse_mode="MarkdownV2")
 
@@ -152,6 +152,26 @@ async def ai_mode_start(message: Message, state: FSMContext):
     await message.answer(MESSAGES[lang]["ai_intro"], reply_markup=get_ai_keyboard(lang), parse_mode="MarkdownV2")
     await state.set_state(AIState.chatting)
 
+@router.message(AIState.chatting, F.voice)
+async def ai_voice_handler(message: Message, state: FSMContext):
+    await message.bot.send_chat_action(chat_id=message.chat.id, action="typing")
+    file_id = message.voice.file_id
+    file = await message.bot.get_file(file_id)
+    file_path = f"data/{uuid.uuid4()}.ogg"
+    await message.bot.download_file(file.file_path, file_path)
+
+    text = await transcribe_voice(file_path)
+    if os.path.exists(file_path): os.remove(file_path)
+
+    if not text:
+        await message.reply("❌ Ovozni aniqlab bo'lmadi. Iltimos, qaytadan urining.")
+        return
+
+    lang = await get_user_language(message.from_user.id)
+    response = await get_ai_response(text, message.from_user.id, lang)
+    await message.reply(f"🎤 *Sizning savolingiz:* {esc(text)}\n\n{response}", parse_mode="Markdown")
+    await log_message(message.from_user.id, text, response)
+
 @router.message(AIState.chatting, F.text)
 async def ai_chat_handler(message: Message, state: FSMContext):
     if any(x in message.text for x in ["Ortga", "Назад", "Back", "cancel"]):
@@ -203,7 +223,6 @@ async def cb_portfolio(callback: CallbackQuery):
         if cat == "mob": await callback.message.answer_video(video=MEDIA["mobilography"], caption=text, parse_mode="MarkdownV2")
         else: await callback.message.answer(text, parse_mode="MarkdownV2")
     except Exception: 
-        # Final fallback: send without formatting if MarkdownV2 fails
         await callback.message.answer(text.replace("\\", ""))
     await callback.answer()
 
@@ -252,11 +271,6 @@ async def hire_finish(message: Message, state: FSMContext):
     await message.answer("✅ *So'rovingiz qabul qilindi\\.*\n\nAbdulloh loyiha detallarini tahlil qilib, tez orada siz bilan bog'lanadi\\. Rahmat\\!", parse_mode="MarkdownV2")
     await state.clear()
 
-@router.message(F.text)
-async def ai_handler(message: Message):
-    lang = await get_user_language(message.from_user.id)
-    await message.answer(f"✦ Bo'limni tanlang yoki *{esc(MESSAGES[lang]['buttons']['ai_chat'])}*ga kiring\\.", parse_mode="MarkdownV2")
-
 # ━━━━━━━━━━━━━━━━━━━━
 # ADMIN COMMANDS
 # ━━━━━━━━━━━━━━━━━━━━
@@ -269,6 +283,33 @@ async def cmd_admin_master(message: Message):
         f"📊 *Users:* {stats['users']}\n"
         f"💬 *AI Messages:* {stats['messages']}\n"
         f"🔥 *Hot Action:* {stats['popular']}\n\n"
-        f"🛠 /users | /db | /reply"
+        f"🛠 /broadcast | /stats | /users"
     )
     await message.answer(text, parse_mode="MarkdownV2")
+
+@router.message(Command("broadcast"), F.from_user.id == ADMIN_ID)
+async def cmd_broadcast(message: Message, state: FSMContext):
+    await message.answer("📝 *Barcha foydalanuvchilarga yuboriladigan xabarni kiriting:*")
+    await state.set_state(AdminStates.waiting_for_broadcast)
+
+@router.message(AdminStates.waiting_for_broadcast, F.from_user.id == ADMIN_ID)
+async def process_broadcast(message: Message, state: FSMContext):
+    users = await get_all_users()
+    count = 0
+    await message.answer(f"🚀 {len(users)} ta foydalanuvchiga yuborish boshlandi...")
+
+    for user_id in users:
+        try:
+            await message.copy_to(user_id)
+            count += 1
+            await asyncio.sleep(0.05) # Prevent flood
+        except Exception:
+            pass
+
+    await message.answer(f"✅ Xabar {count} ta foydalanuvchiga muvaffaqiyatli yetkazildi.")
+    await state.clear()
+
+@router.message(F.text)
+async def ai_handler(message: Message):
+    lang = await get_user_language(message.from_user.id)
+    await message.answer(f"✦ Bo'limni tanlang yoki *{esc(MESSAGES[lang]['buttons']['ai_chat'])}*ga kiring\\.", parse_mode="MarkdownV2")

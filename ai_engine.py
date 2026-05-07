@@ -61,6 +61,20 @@ async def get_ai_response(text: str, user_id: int, lang: str = "uz") -> str:
         logging.error(f"AI Error: {e}")
         return "✦ Tizimda kichik texnik yangilanish ketmoqda. Iltimos, birozdan so'ng bog'laning."
 
+async def transcribe_voice(file_path: str) -> str:
+    """Transcribes voice messages to text using Groq's Whisper-large-v3."""
+    try:
+        with open(file_path, "rb") as audio_file:
+            transcript = await client.audio.transcriptions.create(
+                model="whisper-large-v3",
+                file=audio_file,
+                response_format="text"
+            )
+            return transcript
+    except Exception as e:
+        logging.error(f"Transcription Error: {e}")
+        return ""
+
 def score_lead(name: str, project: str, budget: str) -> str:
     """Simple Lead Scoring to help Abdulloh prioritize."""
     score = 0

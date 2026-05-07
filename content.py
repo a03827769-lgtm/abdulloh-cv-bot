@@ -3,6 +3,8 @@ EXECUTIVE DIGITAL IDENTITY - ABDULLOH v4.0
 Theme: Hyper-Professional, Expert-Led, Result-Oriented
 """
 
+H = "──────────────────────────"
+
 CV_DATA = {
     "name": "Muhammadjonov Abdulloh",
     "title": "Creative Technologist & AI Architect",
@@ -16,29 +18,12 @@ CV_DATA = {
         "ru": "Сочетание скорости креатора Gen-Z и точности AI-инженера.",
         "en": "A fusion of Gen-Z creator agility and AI engineer precision."
     },
-    "projects": [
-        {
-            "name": "Tozalash Servis (Ad)",
-            "type": "Cinematic Ad",
-            "uz": "◈ *Vazifa:* Xizmat ko'rsatish brendi uchun premium vizual imidj yaratish.\n◈ *Yechim:* Cinematic mobilografiya va dinamik montaj.\n◈ *Natija:* Mijozlar ishonchi va brend tanilish darajasi oshishi.",
-            "ru": "◈ *Задача:* Создание премиального визуального имиджа для сервисного бренда.\n◈ *Решение:* Кинематографическая мобилография и динамичный монтаж.\n◈ *Результат:* Рост доверия клиентов и узнаваемости бренда.",
-            "en": "◈ *Goal:* Creating a premium visual image for a service brand.\n◈ *Solution:* Cinematic mobilography and dynamic editing.\n◈ *Result:* Increased customer trust and brand recognition."
-        },
-        {
-            "name": "Smart Balance AI",
-            "type": "AI Ecosystem",
-            "uz": "◈ *Vazifa:* Murakkab moliya hisob-kitoblarini avtomatlashtirish.\n◈ *Yechim:* Llama-3 bazasidagi aqlli moliya yordamchisi.\n◈ *Natija:* Hisob-kitob xatolarining 100% yo'qolishi va biznes shaffofligi.",
-            "ru": "◈ *Задача:* Автоматизация сложных финансовых расчетов.\n◈ *Решение:* Интеллектуальный финансовый помощник на базе Llama-3.\n◈ *Результат:* 100% устранение ошибок в расчетах и прозрачность бизнеса.",
-            "en": "◈ *Goal:* Automating complex financial calculations.\n◈ *Solution:* Intelligent financial assistant based on Llama-3.\n◈ *Result:* 100% elimination of calculation errors and business transparency."
-        },
-        {
-            "name": "Arenda System",
-            "type": "Business Automation",
-            "uz": "◈ *Vazifa:* Ko'chmas mulk ijarasi jarayonlarini raqamlashtirish.\n◈ *Yechim:* Avtomatlashtirilgan ijara va to'lov boshqaruv tizimi.\n◈ *Natija:* Operatsion xarajatlarning 40% ga qisqarishi.",
-            "ru": "◈ *Задача:* Цифровизация процессов аренды недвижимости.\n◈ *Решение:* Автоматизированная система управления арендой и платежами.\n◈ *Результат:* Сокращение операционных расходов на 40%.",
-            "en": "◈ *Goal:* Digitalizing real estate rental processes.\n◈ *Solution:* Automated rental and payment management system.\n◈ *Result:* 40% reduction in operational costs."
-        }
-    ],
+    "contacts": {
+        "telegram": "@abdulloh_ai",
+        "instagram": "abdullokh_mk",
+        "portfolio": "https://t.me/upgcard",
+        "email": "abdulloh@example.com" # Placeholder
+    },
     "experience": [
         {
             "title": "Creative Director (Visual Storytelling)",
@@ -78,9 +63,8 @@ CV_DATA = {
         }
     ],
     "skills": {
-        "visual": ["Cinematography", "Color Grading (DaVinci)", "Visual Strategy", "Motion Design"],
-        "tech": ["Python (Enterprise Bots)", "AI Integration", "Prompt Engineering (Master)", "FastAPI/React"],
-        "strategy": ["Business Automation", "SMM Architecture", "Lead Generation Systems"]
+        "technical": ["Python", "AI Integration", "Prompt Engineering", "FastAPI", "React"],
+        "soft": ["Strategic Thinking", "Visual Storytelling", "Project Management", "Leadership"]
     }
 }
 
@@ -88,17 +72,40 @@ MESSAGES = {
     "uz": {
         "start": (
             f"✦ *EXECUTIVE DIGITAL IDENTITY: ABDULLOH*\n"
-            f"──────────────────────────\n\n"
+            f"{H}\n\n"
             f"Siz innovatsiyalar va yuqori vizual did kesishgan nuqtadasiz\\. "
             f"Men shunchaki bot emasman — men Abdullohning raqamli strategiman\\.\n\n"
             f"◈ *Sizga qanday qiymat bera olamiz?*"
         ),
+        "menu": f"✦ *Asosiy Menyuga xush kelibsiz*\n{H}\n\nQuyidagi bo'limlardan birini tanlang:",
         "about": (
             f"✦ *BRAND PHILOSOPHY*\n"
-            f"──────────────────────────\n\n"
+            f"{H}\n\n"
             f"{CV_DATA['philosophy']['uz']}\n\n"
             f"◈ *Asosiy tamoyillar:* Intizom, Eksperimental yondashuv va Mukammallik\\.\n"
             f"◈ *Sport:* Taekwondo orqali shakllangan 'Hech qachon taslim bo'lmaslik' mentaliteti\\."
+        ),
+        "portfolio": f"✦ *STRATEGIK LOYIHALAR*\n{H}\n\nQuyidagi yo'nalishlardan birini tanlang va ishimiz sifatiga baho bering:",
+        "faq": (
+            f"✦ *KO'P BERILADIGAN SAVOLLAR*\n"
+            f"{H}\n\n"
+            f"◈ *Qanday xizmatlarni ko'rsatasiz?*\n"
+            f"Biz cinematic video ishlab chiqarish va biznes jarayonlarini AI orqali avtomatlashtirishga ixtisoslashganmiz\\.\n\n"
+            f"◈ *Loyiha qancha vaqt oladi?*\n"
+            f"Murakkablikka qarab: Video \\(3\\-7 kun\\), AI Tizimlar \\(14\\-30 kun\\)\\.\n\n"
+            f"◈ *Narxlar qanday?*\n"
+            f"Har bir loyiha individual hisoblanadi, chunki biz 'shablon' yechimlardan qochamiz\\."
+        ),
+        "contact": (
+            f"✦ *ALOQA MARKAZI*\n"
+            f"{H}\n\n"
+            f"Loyiha bo'yicha muhokama yoki takliflar uchun quyidagi kanallar ochiq:"
+        ),
+        "lang_select": "🌐 *Muloqot tilini tanlang:*",
+        "ai_intro": (
+            f"✦ *AI STRATEG BILAN MULOQOT*\n"
+            f"{H}\n\n"
+            f"Savollaringizni yo'llang\\. Men Abdullohning tajribasi va qarashlaridan kelib chiqib sizga javob beraman\\."
         ),
         "hire_intro": "🤝 *STRATEGIK HAMKORLIK*\n\nLoyihangiz tafsilotlarini qoldiring\\. Men ularni tahlil qilaman va Abdulloh bilan bog'lanishingiz uchun zamin yarataman\\.",
         "buttons": {
@@ -118,17 +125,40 @@ MESSAGES = {
     "ru": {
         "start": (
             f"✦ *EXECUTIVE DIGITAL IDENTITY: ABDULLOH*\n"
-            f"──────────────────────────\n\n"
+            f"{H}\n\n"
             f"Вы находитесь на пересечении инноваций и высокого визуального вкуса\\. "
             f"Я не просто бот — я цифровой стратег Абдуллоха\\.\n\n"
             f"◈ *Какую ценность мы можем вам предложить?*"
         ),
+        "menu": f"✦ *Добро пожаловать в Главное Меню*\n{H}\n\nВыберите интересующий раздел:",
         "about": (
             f"✦ *ФИЛОСОФИЯ БРЕНДА*\n"
-            f"──────────────────────────\n\n"
+            f"{H}\n\n"
             f"{CV_DATA['philosophy']['ru']}\n\n"
             f"◈ *Принципы:* Дисциплина, Экспериментальный подход и Совершенство\\.\n"
             f"◈ *Спорт:* Менталитет 'Никогда не сдаваться', сформированный Тхэквондо\\."
+        ),
+        "portfolio": f"✦ *СТРАТЕГИЧЕСКИЕ ПРОЕКТЫ*\n{H}\n\nВыберите направление, чтобы оценить качество нашей работы:",
+        "faq": (
+            f"✦ *ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ*\n"
+            f"{H}\n\n"
+            f"◈ *Какие услуги вы предоставляете?*\n"
+            f"Мы специализируемся на кинематографическом видеопроизводстве и автоматизации бизнеса через AI\\.\n\n"
+            f"◈ *Сколько времени занимает проект?*\n"
+            f"В зависимости от сложности: Видео \\(3\\-7 дней\\), AI Системы \\(14\\-30 дней\\)\\.\n\n"
+            f"◈ *Какие цены?*\n"
+            f"Каждый проект рассчитывается индивидуально, так как мы избегаем шаблонных решений\\."
+        ),
+        "contact": (
+            f"✦ *КОНТАКТНЫЙ ЦЕНТР*\n"
+            f"{H}\n\n"
+            f"Для обсуждения проектов или предложений открыты следующие каналы:"
+        ),
+        "lang_select": "🌐 *Выберите язык общения:*",
+        "ai_intro": (
+            f"✦ *ЧАТ С AI СТРАТЕГОМ*\n"
+            f"{H}\n\n"
+            f"Задавайте свои вопросы\\. Я отвечу вам, основываясь на опыте и видении Абдуллоха\\."
         ),
         "buttons": {
             "about": "💎 Философия",
@@ -147,17 +177,40 @@ MESSAGES = {
     "en": {
         "start": (
             f"✦ *EXECUTIVE DIGITAL IDENTITY: ABDULLOH*\n"
-            f"──────────────────────────\n\n"
+            f"{H}\n\n"
             f"You are at the intersection of innovation and high visual taste\\. "
             f"I am not just a bot — I am Abdulloh's digital strategist\\.\n\n"
             f"◈ *What value can we offer you?*"
         ),
+        "menu": f"✦ *Welcome to the Main Menu*\n{H}\n\nSelect a section to explore:",
         "about": (
             f"✦ *BRAND PHILOSOPHY*\n"
-            f"──────────────────────────\n\n"
+            f"{H}\n\n"
             f"{CV_DATA['philosophy']['en']}\n\n"
             f"◈ *Core Values:* Discipline, Experimental Approach, and Excellence\\.\n"
             f"◈ *Sports:* 'Never Give Up' mentality forged through Taekwondo\\."
+        ),
+        "portfolio": f"✦ *STRATEGIC PROJECTS*\n{H}\n\nChoose a category to evaluate our work quality:",
+        "faq": (
+            f"✦ *FREQUENTLY ASKED QUESTIONS*\n"
+            f"{H}\n\n"
+            f"◈ *What services do you provide?*\n"
+            f"We specialize in cinematic video production and business automation through AI\\.\n\n"
+            f"◈ *How long does a project take?*\n"
+            f"Depending on complexity: Video \\(3\\-7 days\\), AI Systems \\(14\\-30 days\\)\\.\n\n"
+            f"◈ *What is the pricing?*\n"
+            f"Each project is priced individually, as we avoid cookie\\-cutter solutions\\."
+        ),
+        "contact": (
+            f"✦ *CONTACT CENTER*\n"
+            f"{H}\n\n"
+            f"The following channels are open for project discussions or inquiries:"
+        ),
+        "lang_select": "🌐 *Choose your language:*",
+        "ai_intro": (
+            f"✦ *CHAT WITH AI STRATEGIST*\n"
+            f"{H}\n\n"
+            f"Send your questions\\. I will answer based on Abdulloh's experience and vision\\."
         ),
         "buttons": {
             "about": "💎 Philosophy",

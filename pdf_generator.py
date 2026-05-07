@@ -37,10 +37,15 @@ def generate_cv_pdf(lang: str, output_path: str, user_name: str = "Client"):
     
     # --- HEADER ---
     elements.append(Paragraph(CV_DATA["name"].upper(), st_header))
-    elements.append(Paragraph("CREATIVE TECHNOLOGIST & AI ARCHITECT", st_title))
+    elements.append(Paragraph(CV_DATA["title"].upper(), st_title))
     
     # Quick Info
-    info = [[f"📍 Tashkent, Uzbekistan", f"📱 {CV_DATA['contacts']['telegram']}", f"🌐 @upgcard"]]
+    contacts = CV_DATA.get("contacts", {})
+    info = [[
+        f"📍 Tashkent, UZ",
+        f"📱 {contacts.get('telegram', '@abdulloh_ai')}",
+        f"🌐 @upgcard"
+    ]]
     t_info = Table(info, colWidths=[2.2*inch, 2.2*inch, 2.2*inch])
     t_info.setStyle(TableStyle([('FONTSIZE', (0,0), (-1,-1), 10), ('TEXTCOLOR', (0,0), (-1,-1), c_dim)]))
     elements.append(t_info)
@@ -48,19 +53,19 @@ def generate_cv_pdf(lang: str, output_path: str, user_name: str = "Client"):
     
     # --- STRATEGIC PHILOSOPHY ---
     elements.append(Paragraph("EXECUTIVE SUMMARY", st_section))
-    elements.append(Paragraph(CV_DATA["philosophy"][lang], st_philosophy))
+    elements.append(Paragraph(CV_DATA["philosophy"].get(lang, CV_DATA["philosophy"]["en"]), st_philosophy))
     elements.append(Spacer(1, 15))
     
     # --- EXPERTISE ---
     elements.append(Paragraph("CORE EXPERTISE", st_section))
     for exp in CV_DATA["experience"]:
         elements.append(Paragraph(f"<b>{exp['title']}</b>", st_body))
-        elements.append(Paragraph(exp['desc'][lang], ParagraphStyle('Desc', parent=st_body, fontSize=10, spaceAfter=8, textColor=c_text)))
+        elements.append(Paragraph(exp['desc'].get(lang, exp['desc']['en']), ParagraphStyle('Desc', parent=st_body, fontSize=10, spaceAfter=8, textColor=c_text)))
     
-    # --- TESTIMONIALS (The Next Level Part) ---
+    # --- TESTIMONIALS ---
     elements.append(Paragraph("CLIENT TESTIMONIALS", st_section))
     for rev in CV_DATA["reviews"]:
-        elements.append(Paragraph(f"\"{rev['text'][lang]}\"", st_review))
+        elements.append(Paragraph(f"\"{rev['text'].get(lang, rev['text']['en'])}\"", st_review))
         elements.append(Paragraph(f"— {rev['client']}", st_client))
         elements.append(Spacer(1, 5))
         
@@ -73,8 +78,9 @@ def generate_cv_pdf(lang: str, output_path: str, user_name: str = "Client"):
 
     # --- CALL TO ACTION ---
     elements.append(Spacer(1, 50))
-    elements.append(HRFlowable(width="40%", thickness=2, color=c_accent, align='LEFT'))
-    cta_text = f"<i>Prepared exclusively for potential strategic partners.</i><br/>" \
+    # Removed unsupported 'align' argument from HRFlowable
+    elements.append(HRFlowable(width="40%", thickness=2, color=c_accent, hAlign='LEFT'))
+    cta_text = f"<i>Prepared exclusively for {user_name}.</i><br/>" \
                f"<b>Scan or visit to discuss your project: t.me/AbdullohCvbot</b>"
     elements.append(Paragraph(cta_text, ParagraphStyle('CTA', parent=st_body, textColor=c_accent, spaceBefore=10)))
     
