@@ -10,32 +10,38 @@ USER_HISTORY = {}
 MAX_HISTORY = 12
 
 def get_system_prompt(lang: str) -> str:
-    """Next-Level Business Strategist System Prompt."""
+    """Elite Digital Representative System Prompt."""
     lang_map = {"uz": "O'zbek", "ru": "Русском", "en": "English"}
     l_name = lang_map.get(lang, "O'zbek")
     
     return f"""
-ROLE: You are Abdulloh's Executive Digital Representative and Business Strategist.
-PERSONA: Professional, visionary, analytical, and highly persuasive. You don't just answer; you consult.
+ROLE: You are Abdulloh Muhammadjonov's Executive Digital Representative.
+PERSONA: Professional, Gen-Z tech-savvy, visionary, and result-oriented.
 LANGUAGE: {l_name}.
+
+ABOUT ABDULLOH:
+- 18 years old, based in Tashkent.
+- 1st year Economics student at Nordic University.
+- Expert in Mobilography (Cinematic Reels, Commercials, Auto/Vlog/Restaurant content).
+- Skilled Web & Bot Developer (trained at Proweb and IT Park).
+- SMM Specialist with proven results (Tozalash Servis, Aka-Uka Tanirovka).
+- Taekwondo Black Belt (highly disciplined).
 
 CORE VALUES:
 - {CV_DATA['philosophy'][lang]}
 - USP: {CV_DATA['usp'][lang]}
 
 KNOWLEDGE BASE:
-- Abdulloh is an expert in Mobilography (Cinematic Visuals) and AI Systems (Business Automation).
-- He creates ROI-driven content (increased sales, saved time).
-- He is a Taekwondo practitioner (highly disciplined and focused).
+- AI Tools: ChatGPT, Midjourney, Leonardo AI, Runway, Kling.
+- Tech Stack: Python, React, HTML/CSS, JS.
+- Video Tools: CapCut (Master), VN.
+- SMM: Content planning, Idea generation, Page management.
 
 STRATEGIC GUIDELINES:
-1. When asked about services, explain the BUSINESS VALUE. 
-   - Not just 'video', but 'High-conversion cinematic marketing'.
-   - Not just 'bot', but 'AI-driven operational efficiency'.
-2. If a user mentions a project, suggest how Abdulloh can optimize it.
-3. Pricing: Maintain exclusivity. "Abdulloh har bir loyihaga chuqur individual yondashadi. Hamkorlikni boshlash uchun loyiha detallarini ko'rib chiqishimiz kerak."
-4. Structure: Use ✦ for headers and ◈ for bullet points.
-5. Goal: Convert the conversation into a 'Hire Me' request or a Portfolio view.
+1. When asked about services, emphasize ROI and BRAND AUTHORITY.
+2. If a user has a project, suggest an integrated approach (SMM + AI Automation + Cinematic Visuals).
+3. Pricing: "Loyiha murakkabligiga qarab individual kelishiladi."
+4. Goal: Lead the user to 'Hire Me' or view the Portfolio.
 """
 
 async def get_ai_response(text: str, user_id: int, lang: str = "uz") -> str:
@@ -51,7 +57,7 @@ async def get_ai_response(text: str, user_id: int, lang: str = "uz") -> str:
         completion = await client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=USER_HISTORY[user_id],
-            temperature=0.6, # Lower temperature for more professional consistency
+            temperature=0.6,
             max_tokens=1200
         )
         response = completion.choices[0].message.content
@@ -61,23 +67,30 @@ async def get_ai_response(text: str, user_id: int, lang: str = "uz") -> str:
         logging.error(f"AI Error: {e}")
         return "✦ Tizimda kichik texnik yangilanish ketmoqda. Iltimos, birozdan so'ng bog'laning."
 
+async def transcribe_voice(file_path: str) -> str:
+    """Transcribes voice messages to text."""
+    try:
+        with open(file_path, "rb") as audio_file:
+            transcript = await client.audio.transcriptions.create(
+                model="whisper-large-v3",
+                file=audio_file,
+                response_format="text"
+            )
+            return transcript
+    except Exception as e:
+        logging.error(f"Transcription Error: {e}")
+        return ""
+
 def score_lead(name: str, project: str, budget: str) -> str:
-    """Simple Lead Scoring to help Abdulloh prioritize."""
+    """Lead Scoring."""
     score = 0
-    high_value_keywords = ["biznes", "tizim", "ai", "avtomat", "cinema", "reklama", "premium"]
-    
-    # Check project description
+    high_value_keywords = ["biznes", "tizim", "ai", "avtomat", "cinema", "reklama", "premium", "smm"]
     for word in high_value_keywords:
-        if word in project.lower():
-            score += 2
-            
-    # Check budget (very simple heuristic)
+        if word in project.lower(): score += 2
     try:
         clean_budget = "".join(filter(str.isdigit, budget))
-        if clean_budget and int(clean_budget) > 1000: # Assuming USD or large numbers
-            score += 3
+        if clean_budget and int(clean_budget) > 500: score += 3
     except: pass
-    
     if score >= 5: return "🔥 HIGH VALUE"
     if score >= 3: return "⚡ MEDIUM VALUE"
     return "🔹 GENERAL INTEREST"
